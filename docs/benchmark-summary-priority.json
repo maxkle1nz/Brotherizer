@@ -1,0 +1,161 @@
+{
+  "cases": [
+    {
+      "name": "ptbr_narrative_reflective",
+      "runs": [
+        {
+          "mode": "ptbr_narrative_human_mode",
+          "classification": "strong",
+          "winner_text": "Ele foi embora sem dizer nada. Não era coragem que faltava—era só que partir em silêncio evita aquele desgaste de ficar explicando. Na mochila, um caderno, uma foto antiga e uma pergunta que continuava sem resposta.",
+          "rerank_score": 4.6632,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 9.0,
+          "donor_buckets": [
+            "ptbr_reflective",
+            "ptbr_reflective",
+            "ptbr_reflective",
+            "reply_bodies",
+            "reply_bodies"
+          ],
+          "style_signals": [
+            "PT-BR Reflective Human Voice"
+          ]
+        },
+        {
+          "mode": "seriously_ptbr_mode",
+          "classification": "usable",
+          "winner_text": "Ele foi embora sem avisar ninguém. Não foi por covardia, mas porque às vezes é melhor sumir quieto do que ficar se explicando. Na mochila, um caderno, uma foto velha e uma dúvida que nunca resolveu.",
+          "rerank_score": 3.7131999999999996,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 7.0,
+          "donor_buckets": [
+            "ptbr_casual",
+            "ptbr_casual",
+            "ptbr_casual",
+            "reply_bodies",
+            "reply_bodies"
+          ],
+          "style_signals": []
+        }
+      ]
+    },
+    {
+      "name": "ptbr_professional_bio",
+      "runs": [
+        {
+          "mode": "ptbr_professional_human_mode",
+          "classification": "strong",
+          "winner_text": "Sou profissional de marketing com experiência em branding, posicionamento, performance e comunicação para marcas digitais. Há mais de oito anos, desenvolvo estratégias baseadas em dados, focando em crescimento sustentável, diferenciação e conexão real com o público.",
+          "rerank_score": 4.1627,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 8.0,
+          "donor_buckets": [
+            "ptbr_professional_human",
+            "ptbr_professional_human",
+            "ptbr_professional_human",
+            "ptbr_casual",
+            "ptbr_casual"
+          ],
+          "style_signals": [
+            "PT-BR Professional Human Voice"
+          ]
+        },
+        {
+          "mode": "seriously_ptbr_mode",
+          "classification": "usable",
+          "winner_text": "Sou profissional de marketing com experiência em branding, posicionamento, performance e comunicação. Há mais de oito anos trabalho com estratégias orientadas por dados, focando em crescimento sustentável, diferenciação e conexão real com o público.",
+          "rerank_score": 3.9466,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 6.0,
+          "donor_buckets": [
+            "ptbr_casual",
+            "ptbr_casual",
+            "ptbr_casual",
+            "reply_bodies",
+            "reply_bodies"
+          ],
+          "style_signals": []
+        }
+      ]
+    },
+    {
+      "name": "casual_us_human_note",
+      "runs": [
+        {
+          "mode": "casual_us_human_mode",
+          "classification": "usable",
+          "winner_text": "This is still too clean. Real people don't talk like this.",
+          "rerank_score": 3.6083,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 7.0,
+          "donor_buckets": [
+            "casual_us_human",
+            "casual_us_human",
+            "casual_us_human",
+            "reply_bodies",
+            "reply_bodies"
+          ],
+          "style_signals": [
+            "Casual US Human Voice"
+          ]
+        },
+        {
+          "mode": "seriously_english_mode",
+          "classification": "usable",
+          "winner_text": "This reads too clean, too bland. Not quite like something you'd hear from an actual person.",
+          "rerank_score": 3.7972,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 7.0,
+          "donor_buckets": [
+            "en_professional_human",
+            "en_professional_human",
+            "en_professional_human",
+            "en_reflective",
+            "en_reflective",
+            "british_casual"
+          ],
+          "style_signals": [
+            "English Professional Human Voice"
+          ]
+        }
+      ]
+    }
+  ],
+  "mode_summary": {
+    "ptbr_narrative_human_mode": {
+      "overall": "ready",
+      "strong": 1,
+      "usable": 0,
+      "experimental": 0,
+      "total": 1
+    },
+    "seriously_ptbr_mode": {
+      "overall": "usable",
+      "strong": 0,
+      "usable": 2,
+      "experimental": 0,
+      "total": 2
+    },
+    "ptbr_professional_human_mode": {
+      "overall": "ready",
+      "strong": 1,
+      "usable": 0,
+      "experimental": 0,
+      "total": 1
+    },
+    "casual_us_human_mode": {
+      "overall": "usable",
+      "strong": 0,
+      "usable": 1,
+      "experimental": 0,
+      "total": 1
+    },
+    "seriously_english_mode": {
+      "overall": "usable",
+      "strong": 0,
+      "usable": 1,
+      "experimental": 0,
+      "total": 1
+    }
+  }
+}

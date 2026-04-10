@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brotherizer Workspace</title>
+    <link rel="stylesheet" href="/ui/app.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar glass-panel">
+        <div class="brand-block">
+          <div class="brand-mark">
+            <span class="brand-orb"></span>
+          </div>
+          <div>
+            <p class="eyebrow">Brotherizer</p>
+            <h1>Workspace</h1>
+          </div>
+        </div>
+
+        <section class="sidebar-section">
+          <div class="section-header">
+            <h2>Sessions</h2>
+            <button id="new-session-btn" class="icon-button" type="button">+</button>
+          </div>
+          <div id="session-list" class="session-list"></div>
+        </section>
+
+        <section class="sidebar-section">
+          <div class="section-header">
+            <h2>Files</h2>
+            <button id="new-file-btn" class="icon-button" type="button">+</button>
+          </div>
+          <div id="file-list" class="file-list"></div>
+        </section>
+
+        <section class="sidebar-section compact">
+          <h2>Engine</h2>
+          <div class="mini-metrics">
+            <div class="metric-tile">
+              <span class="metric-label">Modes</span>
+              <strong id="mode-count">0</strong>
+            </div>
+            <div class="metric-tile">
+              <span class="metric-label">Drafts</span>
+              <strong id="draft-count">0</strong>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <section class="hero glass-panel">
+          <div class="hero-copy">
+            <p class="eyebrow">Voice Intelligence Engine</p>
+            <h2>Take the text out of AI mode.</h2>
+            <p class="hero-body">
+              Organize source drafts, generated versions, sessions, and final winners in one workspace.
+              Brotherizer pulls human donor signals, style memory, and mode routing into a single rewrite pass.
+            </p>
+          </div>
+          <div class="hero-pills">
+            <span class="pill">human-first</span>
+            <span class="pill">style-radar</span>
+            <span class="pill">grok-judge</span>
+          </div>
+        </section>
+
+        <section class="workspace-grid">
+          <div class="editor-column">
+            <article class="glass-panel editor-panel">
+              <div class="section-header">
+                <div>
+                  <p class="eyebrow">Source</p>
+                  <h3 id="editor-title">Draft</h3>
+                </div>
+                <div class="header-actions">
+                  <button id="save-file-btn" class="soft-button" type="button">Save</button>
+                </div>
+              </div>
+
+              <label class="field">
+                <span>Mode</span>
+                <select id="mode-select"></select>
+              </label>
+
+              <label class="field">
+                <span>Text</span>
+                <textarea id="source-text" placeholder="Drop the draft here. Brotherizer will do the attitude adjustment."></textarea>
+              </label>
+
+              <div class="toggle-row">
+                <label class="toggle">
+                  <input id="xai-judge-toggle" type="checkbox" checked />
+                  <span>Use xAI judge</span>
+                </label>
+              </div>
+
+              <div class="action-row">
+                <button id="rewrite-btn" class="primary-button" type="button">Generate Rewrite</button>
+              </div>
+            </article>
+
+            <article class="glass-panel timeline-panel">
+              <div class="section-header">
+                <div>
+                  <p class="eyebrow">Session log</p>
+                  <h3>Saved winners</h3>
+                </div>
+              </div>
+              <div id="saved-output-list" class="saved-output-list"></div>
+            </article>
+          </div>
+
+          <div class="results-column">
+            <article class="glass-panel results-panel">
+              <div class="section-header">
+                <div>
+                  <p class="eyebrow">Rewrite output</p>
+                  <h3>Candidate board</h3>
+                </div>
+                <div id="status-pill" class="status-pill idle">idle</div>
+              </div>
+
+              <div class="result-meta">
+                <div class="meta-card">
+                  <span class="meta-label">Winner</span>
+                  <strong id="winner-label">No run yet</strong>
+                </div>
+                <div class="meta-card">
+                  <span class="meta-label">Mode</span>
+                  <strong id="active-mode-label">-</strong>
+                </div>
+              </div>
+
+              <section class="winner-panel skeuo-panel">
+                <p class="eyebrow">Selected output</p>
+                <div id="winner-text" class="winner-text">Run a draft to see the chosen rewrite.</div>
+                <div id="winner-why" class="winner-why"></div>
+                <button id="save-winner-btn" class="soft-button" type="button" disabled>Save winner to session</button>
+              </section>
+
+              <section>
+                <div class="section-header compact-header">
+                  <h4>Candidates</h4>
+                </div>
+                <div id="candidate-list" class="candidate-list"></div>
+              </section>
+            </article>
+
+            <article class="glass-panel donor-panel">
+              <div class="section-header">
+                <div>
+                  <p class="eyebrow">Why it sounds human</p>
+                  <h3>Donor memory + style radar</h3>
+                </div>
+              </div>
+
+              <div class="insight-grid">
+                <section>
+                  <h4>Style signals</h4>
+                  <div id="style-signal-list" class="tag-list"></div>
+                </section>
+                <section>
+                  <h4>Donor snippets</h4>
+                  <div id="donor-snippet-list" class="donor-snippet-list"></div>
+                </section>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="session-item-template">
+      <button class="session-item" type="button"></button>
+    </template>
+
+    <template id="file-item-template">
+      <button class="file-item" type="button"></button>
+    </template>
+
+    <template id="candidate-template">
+      <article class="candidate-card skeuo-panel">
+        <div class="candidate-header">
+          <strong class="candidate-label"></strong>
+          <span class="candidate-score"></span>
+        </div>
+        <p class="candidate-text"></p>
+        <p class="candidate-why"></p>
+      </article>
+    </template>
+
+    <script src="/ui/app.js" defer></script>
+  </body>
+</html>

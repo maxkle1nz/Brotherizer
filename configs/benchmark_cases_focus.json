@@ -1,0 +1,17 @@
+[
+  {
+    "name": "ptbr_narrative_reflective",
+    "text": "Ele decidiu ir embora sem avisar. Não por falta de coragem, mas porque às vezes partir em silêncio evita se perder explicando demais. Na mochila, levava um caderno, uma foto antiga e uma pergunta que nunca se resolveu.",
+    "modes": ["ptbr_narrative_human_mode"]
+  },
+  {
+    "name": "british_professional_bio",
+    "text": "Experienced strategist working across brand positioning, messaging, and growth. I help companies clarify what they stand for and turn strategy into work that actually lands.",
+    "modes": ["british_professional_human_mode"]
+  },
+  {
+    "name": "casual_us_human_note",
+    "text": "This still reads too clean and too generic. It doesn't sound like something a real person would actually say.",
+    "modes": ["casual_us_human_mode"]
+  }
+]

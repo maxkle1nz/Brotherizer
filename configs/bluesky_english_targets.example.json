@@ -1,0 +1,30 @@
+[
+  {
+    "label": "British banter discourse",
+    "query": "british banter",
+    "lang": "en-GB",
+    "topic_tags": ["british-english", "banter", "internet-native"],
+    "audience_mode": "post-like"
+  },
+  {
+    "label": "UK music internet discourse",
+    "query": "uk music discourse",
+    "lang": "en-GB",
+    "topic_tags": ["british-english", "music", "pop-culture"],
+    "audience_mode": "post-like"
+  },
+  {
+    "label": "Worldwide gaming hot takes",
+    "query": "gaming hot take",
+    "lang": "en",
+    "topic_tags": ["english-worldwide", "gaming", "internet-slang"],
+    "audience_mode": "post-like"
+  },
+  {
+    "label": "Worldwide pop culture irony",
+    "query": "pop culture discourse",
+    "lang": "en",
+    "topic_tags": ["english-worldwide", "pop-culture", "irony"],
+    "audience_mode": "post-like"
+  }
+]

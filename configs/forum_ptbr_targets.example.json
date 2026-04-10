@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Brasil Reddit style casual thread",
+    "url": "https://old.reddit.com/r/brasil/",
+    "platform": "reddit-web",
+    "source_kind": "forum-thread",
+    "lang": "pt-BR",
+    "topic_tags": ["ptbr", "casual", "internet-native"],
+    "audience_mode": "reply-like"
+  },
+  {
+    "name": "Conversas Reddit style thread",
+    "url": "https://old.reddit.com/r/conversas/",
+    "platform": "reddit-web",
+    "source_kind": "forum-thread",
+    "lang": "pt-BR",
+    "topic_tags": ["ptbr", "casual", "reply-like"],
+    "audience_mode": "reply-like"
+  },
+  {
+    "name": "Futebol Reddit style thread",
+    "url": "https://old.reddit.com/r/futebol/",
+    "platform": "reddit-web",
+    "source_kind": "forum-thread",
+    "lang": "pt-BR",
+    "topic_tags": ["ptbr", "futebol", "banter"],
+    "audience_mode": "reply-like"
+  }
+]

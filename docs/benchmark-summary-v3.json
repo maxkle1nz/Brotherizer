@@ -1,0 +1,429 @@
+{
+  "cases": [
+    {
+      "name": "ptbr_narrative_reflective",
+      "runs": [
+        {
+          "mode": "ptbr_narrative_human_mode",
+          "classification": "strong",
+          "winner_text": "Ele saiu sem dizer nada. Não por falta de coragem, mas porque às vezes o silêncio poupa a gente de se perder em explicações que não vão mudar nada mesmo. Levava na mochila um caderno, uma foto antiga, e uma pergunta que ficou sem resposta.",
+          "rerank_score": 5.0263,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 10.0,
+          "donor_buckets": [
+            "ptbr_reflective",
+            "ptbr_reflective",
+            "ptbr_reflective",
+            "reply_bodies",
+            "reply_bodies"
+          ],
+          "style_signals": [
+            "PT-BR Reflective Human Voice"
+          ]
+        },
+        {
+          "mode": "seriously_ptbr_mode",
+          "classification": "usable",
+          "winner_text": "Ele foi embora sem avisar ninguém. Não foi por covardia, mas porque às vezes é melhor sumir quieto do que ficar se explicando. Na mochila, um caderno, uma foto velha e uma pergunta que nunca teve resposta.",
+          "rerank_score": 3.7131999999999996,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 7.0,
+          "donor_buckets": [
+            "ptbr_casual",
+            "ptbr_casual",
+            "ptbr_casual",
+            "reply_bodies",
+            "reply_bodies"
+          ],
+          "style_signals": []
+        },
+        {
+          "mode": "ptbr_twitter_mode",
+          "classification": "strong",
+          "winner_text": "Mano, ele saiu fora sem avisar ninguém. Não era falta de coragem, sabe? É que às vezes partir na silhueta evita aquele papo de ficar explicando pra caramba. Levava só um caderno, uma foto antiga e uma pergunta que nunca se resolveu mesmo.",
+          "rerank_score": 4.4855,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 9.0,
+          "donor_buckets": [
+            "ptbr_casual",
+            "ptbr_casual",
+            "ptbr_casual",
+            "ptbr_ironic",
+            "ptbr_ironic",
+            "reply_bodies"
+          ],
+          "style_signals": [
+            "PT-BR Casual Internet Voice"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ptbr_professional_bio",
+      "runs": [
+        {
+          "mode": "ptbr_professional_human_mode",
+          "classification": "strong",
+          "winner_text": "Faço estratégias de branding, posicionamento e comunicação para marcas digitais. Há mais de oito anos, trabalho com dados como base, mas sem perder o foco em crescimento sustentável, diferenciação de mercado e conexão real com o público.",
+          "rerank_score": 4.0618,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 9.0,
+          "donor_buckets": [
+            "ptbr_professional_human",
+            "ptbr_professional_human",
+            "ptbr_professional_human",
+            "ptbr_casual",
+            "ptbr_casual"
+          ],
+          "style_signals": [
+            "PT-BR Professional Human Voice"
+          ]
+        },
+        {
+          "mode": "seriously_ptbr_mode",
+          "classification": "strong",
+          "winner_text": "Sou profissional de marketing com experiência em branding, posicionamento, performance e comunicação pra marcas digitais. Faz mais de oito anos que eu desenvolvo estratégias baseadas em dados, focando em crescimento sustentável, diferenciação e conexão real com o público.",
+          "rerank_score": 4.3895,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 9.0,
+          "donor_buckets": [
+            "ptbr_casual",
+            "ptbr_casual",
+            "ptbr_casual",
+            "reply_bodies",
+            "reply_bodies"
+          ],
+          "style_signals": []
+        }
+      ]
+    },
+    {
+      "name": "en_reflective_narrative",
+      "runs": [
+        {
+          "mode": "en_reflective_human_mode",
+          "classification": "strong",
+          "winner_text": "No one got told he was going. Not afraid, no—just silence feeling safer than one more go at explaining. His bag held a notebook, old photograph. And a question that never landed an answer.",
+          "rerank_score": 3.9013,
+          "composition_penalty": 0.3,
+          "xai_judge_score": 8.0,
+          "donor_buckets": [
+            "en_reflective",
+            "en_reflective",
+            "en_reflective",
+            "reply_bodies",
+            "reply_bodies"
+          ],
+          "style_signals": [
+            "English Reflective Human Voice"
+          ]
+        },
+        {
+          "mode": "seriously_english_mode",
+          "classification": "usable",
+          "winner_text": "He left without telling a soul. It wasn't fear driving him, just the sense that silence can be safer than one more explanation. His bag held a notebook, a faded photograph, and a question without a real answer.",
+          "rerank_score": 3.2221,
+          "composition_penalty": 0.55,
+          "xai_judge_score": 10.0,
+          "donor_buckets": [
+            "en_professional_human",
+            "en_professional_human",
+            "en_professional_human",
+            "en_reflective",
+            "en_reflective",
+            "british_casual"
+          ],
+          "style_signals": [
+            "English Professional Human Voice"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "en_professional_bio",
+      "runs": [
+        {
+          "mode": "en_professional_human_mode",
+          "classification": "strong",
+          "winner_text": "Marketing pro with hands-on experience in branding, positioning, performance, and comms strategy for digital brands. Over eight years, I've put together data-driven plans aimed at steady growth, standing out in the market, and real audience connections.",
+          "rerank_score": 3.9337999999999997,
+          "composition_penalty": 0.2,
+          "xai_judge_score": 9.0,
+          "donor_buckets": [
+            "en_professional_human",
+            "en_professional_human",
+            "en_professional_human",
+            "reply_bodies",
+            "reply_bodies"
+          ],
+          "style_signals": [
+            "English Professional Human Voice"
+          ]
+        },
+        {
+          "mode": "seriously_english_mode",
+          "classification": "strong",
+          "winner_text": "I've spent the last eight years as a marketing pro, handling branding, positioning, performance tracking, and comms strategy for digital outfits. Most of my work has gone into crafting data-backed plans that drive real growth, help stand out in the market, and actually connect with people.",
+          "rerank_score": 3.6620999999999997,
+          "composition_penalty": 0.2,
+          "xai_judge_score": 9.0,
+          "donor_buckets": [
+            "en_professional_human",
+            "en_professional_human",
+            "en_professional_human",
+            "en_reflective",
+            "en_reflective",
+            "british_casual"
+          ],
+          "style_signals": [
+            "English Professional Human Voice"
+          ]
+        },
+        {
+          "mode": "casual_us_human_mode",
+          "classification": "usable",
+          "winner_text": "I've spent eight years building strategy for digital brands—positioning, performance, communication, the whole stack. Most of that work comes down to making the message clearer, the positioning sharper, and actually getting it to stick. I lean into data, but the real work is figuring out what moves the needle on growth and how to make your brand feel different in a crowded space.",
+          "rerank_score": 3.6870999999999996,
+          "composition_penalty": 0.55,
+          "xai_judge_score": 9.0,
+          "donor_buckets": [
+            "casual_us_human",
+            "casual_us_human",
+            "casual_us_human",
+            "reply_bodies",
+            "reply_bodies"
+          ],
+          "style_signals": [
+            "Casual US Human Voice"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "british_banter_complaint",
+      "runs": [
+        {
+          "mode": "british_banter_mode",
+          "classification": "usable",
+          "winner_text": "Still too polished, innit. Bit lifeless behind the eyes.",
+          "rerank_score": 4.1389,
+          "composition_penalty": 0.0,
+          "xai_judge_score": null,
+          "donor_buckets": [
+            "british_banter",
+            "british_banter",
+            "british_banter",
+            "british_banter",
+            "british_banter",
+            "reply_bodies"
+          ],
+          "style_signals": [
+            "British Everyday Banter"
+          ]
+        },
+        {
+          "mode": "seriously_english_mode",
+          "classification": "usable",
+          "winner_text": "This version still feels overly smooth, lacking a bit of life.",
+          "rerank_score": 3.9985999999999997,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 7.0,
+          "donor_buckets": [
+            "en_professional_human",
+            "en_professional_human",
+            "en_professional_human",
+            "en_reflective",
+            "en_reflective",
+            "british_casual"
+          ],
+          "style_signals": [
+            "English Professional Human Voice"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "british_professional_bio",
+      "runs": [
+        {
+          "mode": "british_professional_human_mode",
+          "classification": "strong",
+          "winner_text": "Experienced strategist working across brand positioning, messaging, and growth. I help companies get clear on what they stand for, and turn that into work that actually connects.",
+          "rerank_score": 3.9188,
+          "composition_penalty": 0.35,
+          "xai_judge_score": 8.0,
+          "donor_buckets": [
+            "british_professional_human",
+            "british_professional_human",
+            "british_professional_human",
+            "british_casual",
+            "british_casual",
+            "reply_bodies"
+          ],
+          "style_signals": [
+            "British Professional Human Voice"
+          ]
+        },
+        {
+          "mode": "seriously_english_mode",
+          "classification": "strong",
+          "winner_text": "I help companies get honest about what they stand for, then turn that into strategy and work that actually works. A lot of it is taking vague ambition and making it sharp enough to use.",
+          "rerank_score": 4.302099999999999,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 10.0,
+          "donor_buckets": [
+            "en_professional_human",
+            "en_professional_human",
+            "en_professional_human",
+            "en_reflective",
+            "en_reflective",
+            "british_casual"
+          ],
+          "style_signals": [
+            "English Professional Human Voice"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "casual_us_human_note",
+      "runs": [
+        {
+          "mode": "casual_us_human_mode",
+          "classification": "strong",
+          "winner_text": "This still comes off way too clean and generic. Doesn't sound like anything a real person would actually say.",
+          "rerank_score": 3.6083,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 8.0,
+          "donor_buckets": [
+            "casual_us_human",
+            "casual_us_human",
+            "casual_us_human",
+            "reply_bodies",
+            "reply_bodies"
+          ],
+          "style_signals": [
+            "Casual US Human Voice"
+          ]
+        },
+        {
+          "mode": "seriously_english_mode",
+          "classification": "usable",
+          "winner_text": "Still too clean, honestly. Reads like it's been through one too many polishing cycles—lost the rough edges that make it feel real.",
+          "rerank_score": 3.3472,
+          "composition_penalty": 0.0,
+          "xai_judge_score": null,
+          "donor_buckets": [
+            "en_professional_human",
+            "en_professional_human",
+            "en_professional_human",
+            "en_reflective",
+            "en_reflective",
+            "british_casual"
+          ],
+          "style_signals": [
+            "English Professional Human Voice"
+          ]
+        },
+        {
+          "mode": "worldwide_ironic_mode",
+          "classification": "strong",
+          "winner_text": "This still reads like some sterile AI slop, way too clean. Who tf talks like that IRL?? MUH REAL HUMAN VIBES!!!",
+          "rerank_score": 6.0027,
+          "composition_penalty": 0.0,
+          "xai_judge_score": 9.0,
+          "donor_buckets": [
+            "worldwide_ironic",
+            "worldwide_ironic",
+            "worldwide_ironic",
+            "worldwide_ironic",
+            "worldwide_ironic",
+            "reply_bodies"
+          ],
+          "style_signals": [
+            "Worldwide Ironic Gaming Voice"
+          ]
+        }
+      ]
+    }
+  ],
+  "mode_summary": {
+    "ptbr_narrative_human_mode": {
+      "overall": "ready",
+      "strong": 1,
+      "usable": 0,
+      "experimental": 0,
+      "total": 1
+    },
+    "seriously_ptbr_mode": {
+      "overall": "ready",
+      "strong": 1,
+      "usable": 1,
+      "experimental": 0,
+      "total": 2
+    },
+    "ptbr_twitter_mode": {
+      "overall": "ready",
+      "strong": 1,
+      "usable": 0,
+      "experimental": 0,
+      "total": 1
+    },
+    "ptbr_professional_human_mode": {
+      "overall": "ready",
+      "strong": 1,
+      "usable": 0,
+      "experimental": 0,
+      "total": 1
+    },
+    "en_reflective_human_mode": {
+      "overall": "ready",
+      "strong": 1,
+      "usable": 0,
+      "experimental": 0,
+      "total": 1
+    },
+    "seriously_english_mode": {
+      "overall": "ready",
+      "strong": 2,
+      "usable": 3,
+      "experimental": 0,
+      "total": 5
+    },
+    "en_professional_human_mode": {
+      "overall": "ready",
+      "strong": 1,
+      "usable": 0,
+      "experimental": 0,
+      "total": 1
+    },
+    "casual_us_human_mode": {
+      "overall": "ready",
+      "strong": 1,
+      "usable": 1,
+      "experimental": 0,
+      "total": 2
+    },
+    "british_banter_mode": {
+      "overall": "usable",
+      "strong": 0,
+      "usable": 1,
+      "experimental": 0,
+      "total": 1
+    },
+    "british_professional_human_mode": {
+      "overall": "ready",
+      "strong": 1,
+      "usable": 0,
+      "experimental": 0,
+      "total": 1
+    },
+    "worldwide_ironic_mode": {
+      "overall": "ready",
+      "strong": 1,
+      "usable": 0,
+      "experimental": 0,
+      "total": 1
+    }
+  }
+}

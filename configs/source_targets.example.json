@@ -1,0 +1,38 @@
+[
+  {
+    "label": "British Internet Commentary",
+    "query": "UK commentary reaction podcast clips",
+    "region_code": "GB",
+    "relevance_language": "en",
+    "lang": "en-GB",
+    "topic_tags": ["british-english", "comment-culture", "internet-native"],
+    "search_terms": ""
+  },
+  {
+    "label": "English Worldwide Pop Culture",
+    "query": "pop culture commentary internet discourse",
+    "region_code": "US",
+    "relevance_language": "en",
+    "lang": "en",
+    "topic_tags": ["english-worldwide", "pop-culture", "young-adult"],
+    "search_terms": ""
+  },
+  {
+    "label": "British Music Audience",
+    "query": "UK music reaction interview clips",
+    "region_code": "GB",
+    "relevance_language": "en",
+    "lang": "en-GB",
+    "topic_tags": ["british-english", "music", "comment-culture"],
+    "search_terms": ""
+  },
+  {
+    "label": "Worldwide Gaming/Internet Slang",
+    "query": "gaming hot takes funny clips podcast",
+    "region_code": "US",
+    "relevance_language": "en",
+    "lang": "en",
+    "topic_tags": ["english-worldwide", "gaming", "internet-slang"],
+    "search_terms": ""
+  }
+]
