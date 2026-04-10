@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/readme/brotherizer-logo.jpg" alt="Brotherizer logo" width="760" />
+</p>
+
 # Brotherizer
 
 > The rewrite engine that gives LLM text a pulse.
