@@ -1,6 +1,8 @@
 # Brotherizer
 
-Brotherizer is a style-RAG and rewrite system focused on removing the generic "written by AI" vibe from LLM outputs by learning from real human phrasing, rhythm, and audience adaptation.
+Brotherizer is a RAG rewrite system built to strip the generic AI voice out of LLM outputs. It learns from how real people actually write—rhythm, phrasing, audience fit—and uses that to make responses sound human instead of templated.
+
+> For anyone exhausted by LLM copy that's too polished, too safe, and suspiciously dead behind the eyes.
 
 ## Current scope
 
@@ -15,12 +17,14 @@ This repo currently contains:
 
 ## Why this starter
 
-The fastest way to get Brotherizer useful is:
+The quickest way to make Brotherizer useful is:
 
 1. collect real shortform human text,
 2. normalize it into retrieval-ready snippets,
 3. tag it with style metadata,
 4. use it as donor memory for rewrite + rerank.
+
+If your model still sounds like it was focus-grouped to death, this is the lane.
 
 ## Local structure
 
@@ -98,8 +102,8 @@ python storage/build_embedding_index.py \
 ```bash
 python brotherize.py \
   --db data/corpus/brotherizer.db \
-  --mode ptbr_twitter_mode \
-  --text "isso aqui tá soando arrumadinho demais e sem vida" \
+  --mode casual_us_human_mode \
+  --text "This still sounds too polished and generic." \
   --use-xai-judge
 ```
 
@@ -160,8 +164,8 @@ Example request:
 curl -X POST http://127.0.0.1:5555/rewrite \
   -H 'Content-Type: application/json' \
   -d '{
-    "text": "isso aqui tá soando arrumadinho demais e sem vida",
-    "mode": "ptbr_twitter_mode",
+    "text": "This still sounds too polished and generic.",
+    "mode": "casual_us_human_mode",
     "db": "data/corpus/brotherizer.db",
     "use_xai_judge": true
   }'
@@ -226,8 +230,8 @@ cd /home/neodark/genesis/brotherizer
 set -a && . ./.runtime/brotherizer.env && set +a
 python3 brotherize.py \
   --db data/corpus/brotherizer.db \
-  --mode ptbr_twitter_mode \
-  --text "isso aqui tá soando arrumadinho demais e sem vida" \
+  --mode casual_us_human_mode \
+  --text "This still sounds too polished and generic." \
   --use-xai-judge
 ```
 
@@ -477,10 +481,10 @@ Rewrite request:
 curl -X POST http://127.0.0.1:5555/rewrite \
   -H 'Content-Type: application/json' \
   -d '{
-    "text": "isso aqui tá soando arrumadinho demais e sem vida",
-    "query": "ptbr casual reclamação internet-native",
-    "bucket": "ptbr_casual",
-    "pack": "data/donor_packs/ptbr_v1.ndjson"
+    "text": "This still sounds too polished and generic.",
+    "query": "casual American direct internet-native reply",
+    "bucket": "casual_us_human",
+    "pack": "data/donor_packs/english_v3.ndjson"
   }'
 ```
 
@@ -616,8 +620,8 @@ python brotherize.py \
 
 ```bash
 python brotherize.py \
-  --mode seriously_ptbr_mode \
-  --text "isso aqui tá soando arrumadinho demais e sem vida"
+  --mode seriously_english_mode \
+  --text "This still sounds too polished and generic."
 ```
 
 You can also blend buckets:
