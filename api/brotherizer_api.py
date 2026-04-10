@@ -227,7 +227,7 @@ def recover_inflight_jobs() -> None:
 
 def main() -> int:
     host = os.environ.get("BROTHERIZER_HOST", "127.0.0.1")
-    port = int(os.environ.get("BROTHERIZER_PORT", "8787"))
+    port = int(os.environ.get("BROTHERIZER_PORT", "5555"))
     recover_inflight_jobs()
     server = ThreadingHTTPServer((host, port), BrotherizerHandler)
     print(json.dumps({"ok": True, "host": host, "port": port}))

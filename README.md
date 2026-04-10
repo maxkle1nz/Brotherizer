@@ -1,57 +1,119 @@
 # Brotherizer
 
-Brotherizer is an API-first rewrite engine for making LLM output sound less generic, less polished-for-no-reason, and more like something a real person would actually say.
+> The rewrite engine that gives LLM text a pulse.
 
-It does that by combining:
+LLM text can be technically correct and still feel socially dead. Brotherizer exists for that exact problem.
 
-- donor-memory retrieval
-- mode-based voice routing
-- surface-aware rewrite conditioning
-- heuristic reranking
-- optional judge scoring
+It is an API-first style-retrieval, rewrite, and reranking system for teams, agents, and products that already generate text with models but want the output to sound warmer, sharper, more human, and less like it was polished by a committee of very anxious robots.
 
-The product surface is intentionally narrow:
+No detector cosplay. No fake-human sludge. No polished-for-no-reason copy.
+
+Just better text.
+
+## What Brotherizer is
+
+Brotherizer is a narrow product on purpose:
+
+- it retrieves donor writing patterns
+- it rewrites for the right mode and surface
+- it reranks multiple candidates
+- it lets the client keep the winner or choose another option
+
+Think of it as voice middleware for LLM output.
+
+If your model already knows what to say but keeps saying it like a brand-safe hostage statement, this is the lane.
+
+## What it is not
+
+Brotherizer is not:
+
+- a general chat model
+- a giant prompt-management suite
+- a full writing app
+- a detector-evasion gimmick
+
+The point is not to make text look "less AI" in some scammy benchmark sense.
+
+The point is to make it sound more like a person actually meant it.
+
+## How it works
+
+Brotherizer runs a five-part pipeline:
+
+1. **Retrieve donor texture**
+   - pull donor snippets from local packs or the corpus database
+   - optionally use local embeddings for semantic lookup
+
+2. **Resolve mode + surface**
+   - choose the right voice family
+   - apply surface-aware formatting and style directives
+
+3. **Generate multiple rewrites**
+   - produce several candidates instead of pretending the first shot is always the best shot
+
+4. **Rerank**
+   - score candidates for semantic fidelity, mode fit, surface fit, anti-generic behavior, and composition quality
+   - optionally run an xAI/Grok judge pass for harder selection calls
+
+5. **Persist the decision**
+   - keep the `winner`
+   - allow a client or user to `choose` a different candidate later
+   - store job, candidate, and choice history in the runtime DB
+
+The result is simple:
 
 - send text in
-- get ranked rewrite options back
-- pick the winner, or choose another candidate
+- get ranked options back
+- keep the winner, or override it
 
-No bundled workspace. No embedded review app. Just the engine.
+## Current model stack
 
-## What it is
+Brotherizer does not pretend all providers are interchangeable. The repo ships with a specific split today:
 
-Brotherizer is for teams, agents, and products that already have LLM text generation, but are tired of:
+- **Generation lane:** Perplexity Sonar
+- **Judge lane:** xAI Grok reasoning models
+- **Optional semantic retrieval lane:** local Ollama embeddings
 
-- polished-but-dead copy
-- safe generic phrasing
-- fake “humanized” output that still reads like a bot
-- outputs that ignore audience and surface
+In practice, that means:
 
-If your model still sounds like it was focus-grouped to death, this is the lane.
+- **Perplexity Sonar** handles the fast rewrite pass
+- **Grok** handles the optional judgment-heavy pass when selection quality matters more than speed
+- **Ollama** is there if you want local semantic retrieval for the donor corpus
 
-## What it does
+Current defaults in the repo:
 
-Brotherizer takes:
+- generation model: `sonar`
+- judge model: `grok-4.20-reasoning`
+- embedding model: `nomic-embed-text`
 
-- `text`
-- `mode`
-- optional `surface_mode`
-- optional `candidate_count`
-- optional judge lane
+Earlier Grok reasoning variants can still be used by setting `BROTHERIZER_XAI_MODEL`. The public docs explain this in more detail in [`docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md`](docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md).
 
-And returns:
+## The research system is still here
 
-- a stable `job_id`
-- a ranked `winner`
-- ranked `candidates`
-- donor and style-signal context
-- durable `choose` semantics for selecting a non-winner candidate
+It was **not** removed.
+
+What changed is the public framing.
+
+The live scraping and internal acquisition lanes are no longer part of the public repo, but the public research substrate is still very real:
+
+- donor packs under [`data/donor_packs/`](data/donor_packs/)
+- corpus DB builder
+- optional embedding index builder
+- style radar seed signals and DB builder
+- formatting / internet-symbol packs
+- retrieval selectors that feed the rewrite engine
+
+If you want the full public explanation, go here:
+
+- [`docs/wiki/HOW_IT_WORKS.md`](docs/wiki/HOW_IT_WORKS.md)
+- [`docs/wiki/LOCAL_SETUP_AND_DATABASES.md`](docs/wiki/LOCAL_SETUP_AND_DATABASES.md)
+- [`RESEARCH/README.md`](RESEARCH/README.md)
 
 ## Core features
 
 ### 1. Rewrite modes
 
-Brotherizer ships with mode routing for distinct voice families:
+Brotherizer ships with multiple voice families, including:
 
 - `british_banter_mode`
 - `worldwide_ironic_mode`
@@ -65,68 +127,56 @@ Brotherizer ships with mode routing for distinct voice families:
 - `seriously_english_mode`
 - `seriously_ptbr_mode`
 
-Defined in:
-
-- [brotherizer_modes.json](/Users/cosmophonix/Brotherizer/configs/brotherizer_modes.json)
+Defined in [`configs/brotherizer_modes.json`](configs/brotherizer_modes.json).
 
 ### 2. Surface-aware rewriting
 
-Brotherizer can condition the rewrite for the intended surface:
+Brotherizer can condition the rewrite for:
 
 - `reply`
 - `post`
+- `thread`
+- `bio`
 - `caption`
 - `note`
-- `bio`
 
-This is not cosmetic. It changes:
-
-- rhythm
-- punctuation looseness
-- formatting tolerance
-- reranking behavior
+That changes more than formatting. It changes rhythm, looseness, compression, and reranking behavior.
 
 ### 3. Donor memory
 
-Brotherizer uses donor packs built from real writing patterns instead of relying on generic prompt adjectives alone.
+Brotherizer does not rely on prompt adjectives alone.
 
-The repo ships with donor packs under:
+It retrieves donor snippets from real writing packs and uses them as texture, pressure, and voice reference without copying them verbatim.
 
-- [`data/donor_packs/`](/Users/cosmophonix/Brotherizer/data/donor_packs)
+See [`RESEARCH/DONOR_PACKS.md`](RESEARCH/DONOR_PACKS.md).
 
-### 4. Style radar + internet formatting packs
+### 4. Style radar + formatting packs
 
-Brotherizer supports formatting-aware and culture-aware steering through:
+Brotherizer also uses:
 
-- [internet_symbol_library.json](/Users/cosmophonix/Brotherizer/configs/internet_symbol_library.json)
-- [style_radar_seed_signals.json](/Users/cosmophonix/Brotherizer/configs/style_radar_seed_signals.json)
+- [`configs/style_radar_seed_signals.json`](configs/style_radar_seed_signals.json)
+- [`configs/internet_symbol_library.json`](configs/internet_symbol_library.json)
 
-That lets it reason about:
+That helps it reason about:
 
 - internet-native markers
 - compact reaction language
 - reflective vs casual surfaces
 - profile/bio cleanliness
-- thread vs reply structure
+- reply vs thread vs note behavior
 
 ### 5. Candidate ranking
 
-Brotherizer does not just emit one rewrite and hope for the best.
+Brotherizer does not emit one rewrite and pray.
 
-It generates multiple candidates and reranks them with:
+It generates several candidates and reranks them with:
 
 - semantic preservation
 - mode fit
 - surface fit
 - anti-generic heuristics
 - composition penalties
-- optional xAI judge score
-
-Key files:
-
-- [rewrite_executor.py](/Users/cosmophonix/Brotherizer/rewrite/rewrite_executor.py)
-- [rewrite_reranker.py](/Users/cosmophonix/Brotherizer/rewrite/rewrite_reranker.py)
-- [xai_judge.py](/Users/cosmophonix/Brotherizer/rewrite/xai_judge.py)
+- optional xAI judge scoring
 
 ### 6. Durable runtime jobs
 
@@ -138,38 +188,12 @@ The runtime persists:
 - runtime errors
 - idempotency keys
 
-This gives you:
+That gives you:
 
 - stable `job_id`
-- restart-safe reads of completed jobs
 - `winner` vs `chosen`
+- replay-safe reads of completed jobs
 - idempotent rewrite submission
-
-Key files:
-
-- [service.py](/Users/cosmophonix/Brotherizer/runtime/service.py)
-- [runtime_db.py](/Users/cosmophonix/Brotherizer/storage/runtime_db.py)
-- [runtime_ids.py](/Users/cosmophonix/Brotherizer/runtime/runtime_ids.py)
-
-## API surface
-
-### Canonical endpoints
-
-- `GET /`
-- `GET /v1/health`
-- `GET /v1/modes`
-- `GET /v1/capabilities`
-- `POST /v1/rewrite`
-- `GET /v1/jobs/:id`
-- `POST /v1/jobs/:id/choose`
-
-### Legacy wrappers
-
-- `GET /health`
-- `GET /modes`
-- `POST /rewrite`
-
-The legacy endpoints are still supported, but `/v1/*` is the canonical contract.
 
 ## Quick start
 
@@ -190,52 +214,80 @@ export XAI_API_KEY=your_key_here
 
 Notes:
 
-- generation currently runs through **Perplexity Sonar**
-- the xAI lane is optional and currently used as a **judge**
-- current xAI default in code is `grok-4.20-reasoning`
+- `PERPLEXITY_API_KEY` is required for generation
+- `XAI_API_KEY` is only required if you want the judge lane
+- local embeddings require a running Ollama instance if you choose to build them
+
+You can also copy the example env:
+
+```bash
+cp .runtime/brotherizer.env.example .runtime/brotherizer.env
+```
 
 ### 3. Build the local stores
 
+Build the corpus DB:
+
 ```bash
-python storage/build_corpus_db.py \
+python3 storage/build_corpus_db.py \
   --inputs data/donor_packs/english_v3.ndjson data/donor_packs/ptbr_v2.ndjson \
-  --db data/corpus/brotherizer.db
-
-python storage/build_style_radar_db.py \
-  --input configs/style_radar_seed_signals.json \
-  --db data/corpus/style_radar.db
-
-python storage/build_embedding_index.py \
   --db data/corpus/brotherizer.db
 ```
 
-### 4. Run from the CLI
+Build the style radar DB:
 
 ```bash
-python brotherize.py \
-  --db data/corpus/brotherizer.db \
+python3 storage/build_style_radar_db.py \
+  --input configs/style_radar_seed_signals.json \
+  --db data/corpus/style_radar.db
+```
+
+Optional: build embeddings for semantic retrieval:
+
+```bash
+python3 storage/build_embedding_index.py \
+  --db data/corpus/brotherizer.db
+```
+
+## Run Brotherizer
+
+### CLI
+
+Recommended mode-driven example:
+
+```bash
+python3 brotherize.py \
   --mode casual_us_human_mode \
   --text "This still sounds too polished and generic." \
   --use-xai-judge
 ```
 
-Seriously mode:
+Grounded, more restrained example:
 
 ```bash
-python brotherize.py \
-  --db data/corpus/brotherizer.db \
+python3 brotherize.py \
   --mode seriously_english_mode \
-  --text "I think this sounds too polished and generic." \
+  --text "I think this still sounds too polished and generic." \
   --use-xai-judge
 ```
 
-### 5. Run the API
+### API
+
+Run the API directly:
 
 ```bash
-python api/brotherizer_api.py
+python3 api/brotherizer_api.py
 ```
 
-### 6. Rewrite via API
+Or use the helper script:
+
+```bash
+./scripts/start_brotherizer_api.sh
+```
+
+By default, Brotherizer serves on `http://127.0.0.1:5555`.
+
+Rewrite via API:
 
 ```bash
 curl -X POST http://127.0.0.1:5555/v1/rewrite \
@@ -249,13 +301,7 @@ curl -X POST http://127.0.0.1:5555/v1/rewrite \
   }'
 ```
 
-This returns:
-
-- stable `job_id`
-- ranked `winner`
-- ranked `candidates`
-
-### 7. Choose a non-winner candidate
+Choose a non-winner candidate later:
 
 ```bash
 curl -X POST http://127.0.0.1:5555/v1/jobs/<job_id>/choose \
@@ -267,69 +313,103 @@ curl -X POST http://127.0.0.1:5555/v1/jobs/<job_id>/choose \
   }'
 ```
 
-## Capabilities
+## API surface
 
-`GET /v1/capabilities` currently reports:
+Canonical endpoints:
 
-- generation provider/model
-- judge provider/model
-- practical request limits
-- supported runtime features
+- `GET /`
+- `GET /v1/health`
+- `GET /v1/modes`
+- `GET /v1/capabilities`
+- `POST /v1/rewrite`
+- `GET /v1/jobs/:id`
+- `POST /v1/jobs/:id/choose`
 
-Milestone 1 is intentionally API-only.
+Legacy wrappers:
 
-## Milestone 1 scope
+- `GET /health`
+- `GET /modes`
+- `POST /rewrite`
 
-Included:
+The real contract lives under `/v1/*`.
 
-- phrase/paragraph rewrite
-- multiple candidate generation
-- ranking and optional judge
-- durable runtime jobs
-- `winner` vs `chosen`
-- idempotency
+## Repo docs / wiki
 
-Not included:
+Start here:
 
-- file rewrite parity
-- document rewrite parity
-- chunked document assembly
-- embedded UI
+- [`docs/README.md`](docs/README.md)
+- [`docs/wiki/START_HERE.md`](docs/wiki/START_HERE.md)
 
-## Repository layout
+Most useful pages:
 
-### Product code
+- [`docs/wiki/HOW_IT_WORKS.md`](docs/wiki/HOW_IT_WORKS.md)
+- [`docs/wiki/POSITIONING.md`](docs/wiki/POSITIONING.md)
+- [`docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md`](docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md)
+- [`docs/wiki/API_REFERENCE.md`](docs/wiki/API_REFERENCE.md)
+- [`docs/wiki/SECURITY_AND_SECRETS.md`](docs/wiki/SECURITY_AND_SECRETS.md)
 
-- [`api/`](/Users/cosmophonix/Brotherizer/api)
-- [`runtime/`](/Users/cosmophonix/Brotherizer/runtime)
-- [`retrieval/`](/Users/cosmophonix/Brotherizer/retrieval)
-- [`rewrite/`](/Users/cosmophonix/Brotherizer/rewrite)
-- [`scoring/`](/Users/cosmophonix/Brotherizer/scoring)
-- [`storage/`](/Users/cosmophonix/Brotherizer/storage)
-- [`tests/`](/Users/cosmophonix/Brotherizer/tests)
+Research and corpus-building docs:
 
-### Product assets
+- [`RESEARCH/README.md`](RESEARCH/README.md)
+- [`RESEARCH/BUILDING_DATABASES.md`](RESEARCH/BUILDING_DATABASES.md)
+- [`RESEARCH/DONOR_PACKS.md`](RESEARCH/DONOR_PACKS.md)
+- [`RESEARCH/CONTRIBUTING.md`](RESEARCH/CONTRIBUTING.md)
 
-- [`configs/brotherizer_modes.json`](/Users/cosmophonix/Brotherizer/configs/brotherizer_modes.json)
-- [`configs/internet_symbol_library.json`](/Users/cosmophonix/Brotherizer/configs/internet_symbol_library.json)
-- [`configs/style_radar_seed_signals.json`](/Users/cosmophonix/Brotherizer/configs/style_radar_seed_signals.json)
-- [`data/donor_packs/`](/Users/cosmophonix/Brotherizer/data/donor_packs)
+## Contributing
+
+Brotherizer gets stronger when the donor packs get better.
+
+We especially want:
+
+- more languages
+- more registers
+- cleaner professional voices
+- better note / reply / caption coverage
+
+If you can build a clean, text-only donor pack in your language, we want it.
+
+Please keep identity out of the data:
+
+- no handles
+- no names
+- no emails
+- no signatures
+- no `source_ref`
+- no metadata that can reveal the author
+
+Start here:
+
+- [`RESEARCH/CONTRIBUTING.md`](RESEARCH/CONTRIBUTING.md)
+- [`RESEARCH/SAFETY_AND_SANITIZATION.md`](RESEARCH/SAFETY_AND_SANITIZATION.md)
+- [`RESEARCH/LANGUAGE_COVERAGE.md`](RESEARCH/LANGUAGE_COVERAGE.md)
+
+## Positioning
+
+Brotherizer sits between a brand-voice system and LLM middleware.
+
+It is closer to:
+
+- a style-retrieval runtime
+- a rewrite-and-rerank engine
+- a choice layer for agent output
+
+It is not trying to be:
+
+- Jasper
+- Grammarly
+- PromptLayer
+- LangSmith
+- an "undetectable AI" circus
+
+Those are adjacent categories. Brotherizer's lane is tighter:
+
+**retrieve the right texture, rewrite the line, rerank the options, and keep the one that actually sounds alive.**
 
 ## Verification
 
 Core regression checks:
 
 ```bash
-python3 -m py_compile api/brotherizer_api.py runtime/service.py storage/runtime_db.py tests/test_runtime_service.py tests/test_runtime_api.py
+python3 -m py_compile api/brotherizer_api.py brotherize.py runtime/service.py storage/runtime_db.py tests/test_runtime_service.py tests/test_runtime_api.py
 python3 -m unittest tests/test_runtime_service.py tests/test_runtime_api.py
 ```
-
-## Positioning
-
-Brotherizer is not trying to be:
-
-- a general-purpose chat model
-- a complete writing app
-- a giant orchestration framework
-
-It is the rewrite engine you call when the model output is technically fine but socially dead.
