@@ -45,7 +45,7 @@ class RuntimeApiTests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertIn("providers", payload)
         self.assertIn("limits", payload)
-        self.assertIn("ui", payload)
+        self.assertIn("features", payload)
 
     @patch("api.brotherizer_api.submit_rewrite")
     def test_v1_rewrite_error_envelope(self, mocked_submit) -> None:

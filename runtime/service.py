@@ -27,12 +27,10 @@ from storage.runtime_db import (  # noqa: E402
     create_runtime_error,
     get_idempotency_record,
     get_job,
-    get_review_session,
     list_candidates,
     list_choices,
     list_runtime_errors,
     replace_candidates,
-    upsert_review_session,
     update_job_state,
 )
 from rewrite_reranker import DEFAULT_XAI_MODEL, heuristic_rerank, merge_xai_scores, run_xai_judge_scores  # noqa: E402
@@ -46,7 +44,6 @@ MAX_CANDIDATE_COUNT = int(os.environ.get("BROTHERIZER_MAX_CANDIDATE_COUNT", "8")
 GENERATION_PROVIDER = "perplexity"
 GENERATION_MODEL = os.environ.get("BROTHERIZER_GENERATION_MODEL", "sonar")
 JUDGE_PROVIDER = "xai"
-DEFAULT_UI_MODE = os.environ.get("BROTHERIZER_UI_MODE", "off")
 
 
 def now_iso() -> str:
@@ -132,11 +129,6 @@ def capabilities_payload() -> dict[str, Any]:
             "max_candidate_count": MAX_CANDIDATE_COUNT,
             "supports_document_rewrite": False,
         },
-        "ui": {
-            "companion_enabled": True,
-            "modes": ["off", "auto", "always"],
-            "default_mode": DEFAULT_UI_MODE,
-        },
         "features": {
             "surface_mode": True,
             "choose_candidate": True,
@@ -188,17 +180,12 @@ def normalize_rewrite_request(payload: dict[str, Any]) -> dict[str, Any]:
             status=400,
         )
 
-    ui_mode = str(payload.get("ui_mode") or DEFAULT_UI_MODE or "off")
-    if ui_mode not in {"off", "auto", "always"}:
-        raise RuntimeApiError("INVALID_UI_MODE", "ui_mode must be off, auto, or always.", phase="request", status=400)
-
     return {
         "text": text,
         "mode": mode,
         "surface_mode": str(payload.get("surface_mode", "") or ""),
         "query": str(payload.get("query", "") or ""),
         "candidate_count": candidate_count,
-        "ui_mode": ui_mode,
         "use_xai_judge": bool(payload.get("use_xai_judge", judge_enabled())),
         "client": payload.get("client") or {},
     }
@@ -263,27 +250,6 @@ def _legacy_api_run(
         return generated, scored, xai_scores
 
 
-def should_open_review(*, ui_mode: str, text: str, candidates: list[dict[str, Any]], judge_used: bool) -> bool:
-    def scores_are_close(threshold: float) -> bool:
-        if len(candidates) < 2:
-            return False
-        top = float(candidates[0].get("score", 0))
-        nxt = float(candidates[1].get("score", 0))
-        return abs(top - nxt) <= threshold
-
-    if ui_mode == "off":
-        return False
-    if ui_mode == "always":
-        return True
-    if len(text) >= 1200:
-        return True
-    if judge_used and scores_are_close(0.35):
-        return True
-    if scores_are_close(0.2):
-        return True
-    return False
-
-
 def _candidate_record(job_id: str, idx: int, item: dict[str, Any], generated: dict[str, Any]) -> dict[str, Any]:
     return {
         "id": make_runtime_id("brc"),
@@ -309,7 +275,6 @@ def _job_response(conn, job_id: str) -> dict[str, Any]:
     if not job:
         raise RuntimeApiError("JOB_NOT_FOUND", f"Job `{job_id}` not found.", phase="runtime", status=404)
     candidates = list_candidates(conn, job_id=job_id)
-    review = get_review_session(conn, job_id=job_id)
     choices = list_choices(conn, job_id=job_id)
     runtime_errors = list_runtime_errors(conn, job_id=job_id)
 
@@ -342,10 +307,6 @@ def _job_response(conn, job_id: str) -> dict[str, Any]:
         if row["id"] == job["chosen_candidate_id"]:
             chosen = item
 
-    review_url = None
-    if review:
-        review_url = f"/review/{job_id}"
-
     return {
         "job_id": job["id"],
         "status": job["status"],
@@ -372,7 +333,6 @@ def _job_response(conn, job_id: str) -> dict[str, Any]:
             "judge_provider": job["judge_provider"],
             "judge_model": job["judge_model"],
         },
-        "review_url": review_url,
         "choice_history": [
             {
                 "choice_id": row["id"],
@@ -414,7 +374,6 @@ def submit_rewrite(payload: dict[str, Any], *, idempotency_key: str | None = Non
         "query": normalized["query"],
         "candidate_count": normalized["candidate_count"],
         "use_xai_judge": normalized["use_xai_judge"],
-        "ui_mode": normalized["ui_mode"],
     }
     req_hash = request_hash(request_body)
     conn = connect_runtime()
@@ -487,22 +446,6 @@ def submit_rewrite(payload: dict[str, Any], *, idempotency_key: str | None = Non
             winner_candidate_id=winner_candidate_id,
         )
 
-        if should_open_review(
-            ui_mode=normalized["ui_mode"],
-            text=normalized["text"],
-            candidates=records,
-            judge_used=normalized["use_xai_judge"] and bool(xai_scores),
-        ):
-            upsert_review_session(
-                conn,
-                review_session={
-                    "id": make_runtime_id("brr"),
-                    "job_id": job_id,
-                    "review_url_token": make_runtime_id("rvw"),
-                    "ui_mode": normalized["ui_mode"],
-                    "created_at": now_iso(),
-                },
-            )
         return _job_response(conn, job_id)
     except RuntimeApiError:
         raise

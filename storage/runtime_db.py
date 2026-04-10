@@ -58,15 +58,6 @@ CREATE TABLE IF NOT EXISTS choices (
     FOREIGN KEY(candidate_id) REFERENCES candidates(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS review_sessions (
-    id TEXT PRIMARY KEY,
-    job_id TEXT NOT NULL UNIQUE,
-    review_url_token TEXT NOT NULL,
-    ui_mode TEXT NOT NULL DEFAULT 'off',
-    created_at TEXT NOT NULL,
-    FOREIGN KEY(job_id) REFERENCES jobs(id) ON DELETE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS runtime_errors (
     id TEXT PRIMARY KEY,
     job_id TEXT NOT NULL,
@@ -221,27 +212,6 @@ def create_choice(conn: sqlite3.Connection, *, choice: dict) -> None:
     conn.commit()
 
 
-def upsert_review_session(conn: sqlite3.Connection, *, review_session: dict) -> None:
-    conn.execute(
-        """
-        INSERT INTO review_sessions (id, job_id, review_url_token, ui_mode, created_at)
-        VALUES (?, ?, ?, ?, ?)
-        ON CONFLICT(job_id) DO UPDATE SET
-            id = excluded.id,
-            review_url_token = excluded.review_url_token,
-            ui_mode = excluded.ui_mode
-        """,
-        (
-            review_session["id"],
-            review_session["job_id"],
-            review_session["review_url_token"],
-            review_session["ui_mode"],
-            review_session["created_at"],
-        ),
-    )
-    conn.commit()
-
-
 def create_runtime_error(conn: sqlite3.Connection, *, error: dict) -> None:
     conn.execute(
         """
@@ -285,10 +255,6 @@ def list_candidates(conn: sqlite3.Connection, *, job_id: str) -> list[sqlite3.Ro
         "SELECT * FROM candidates WHERE job_id = ? ORDER BY rank ASC, id ASC",
         (job_id,),
     ).fetchall()
-
-
-def get_review_session(conn: sqlite3.Connection, *, job_id: str) -> sqlite3.Row | None:
-    return conn.execute("SELECT * FROM review_sessions WHERE job_id = ?", (job_id,)).fetchone()
 
 
 def list_choices(conn: sqlite3.Connection, *, job_id: str) -> list[sqlite3.Row]:

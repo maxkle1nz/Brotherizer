@@ -40,14 +40,13 @@ class RuntimeServiceTests(unittest.TestCase):
                 "mode": "casual_us_human_mode",
                 "surface_mode": "reply",
                 "candidate_count": 2,
-                "ui_mode": "always",
                 "use_xai_judge": False,
             }
         )
         self.assertEqual(result["status"], "completed")
         self.assertEqual(result["winner"]["label"], "winner")
         self.assertEqual(len(result["candidates"]), 2)
-        self.assertTrue(result["review_url"])
+        self.assertNotIn("review_url", result)
 
         fetched = service.get_job_response(result["job_id"])
         self.assertEqual(fetched["job_id"], result["job_id"])
@@ -62,7 +61,6 @@ class RuntimeServiceTests(unittest.TestCase):
                 "mode": "casual_us_human_mode",
                 "surface_mode": "reply",
                 "candidate_count": 2,
-                "ui_mode": "off",
                 "use_xai_judge": False,
             }
         )
@@ -89,7 +87,6 @@ class RuntimeServiceTests(unittest.TestCase):
             "mode": "casual_us_human_mode",
             "surface_mode": "reply",
             "candidate_count": 2,
-            "ui_mode": "off",
             "use_xai_judge": False,
         }
         first = service.submit_rewrite(payload, idempotency_key="abc")
@@ -103,7 +100,6 @@ class RuntimeServiceTests(unittest.TestCase):
             "mode": "casual_us_human_mode",
             "surface_mode": "reply",
             "candidate_count": 2,
-            "ui_mode": "off",
             "use_xai_judge": False,
         }
         second_payload = {
@@ -111,7 +107,6 @@ class RuntimeServiceTests(unittest.TestCase):
             "mode": "casual_us_human_mode",
             "surface_mode": "reply",
             "candidate_count": 2,
-            "ui_mode": "off",
             "use_xai_judge": False,
         }
         service.submit_rewrite(first_payload, idempotency_key="same-key")

@@ -125,14 +125,12 @@ Notes:
 python api/brotherizer_api.py
 ```
 
-This serves three surfaces:
+This serves the API only.
 
-- `http://127.0.0.1:5555/`
-  - legacy workspace UI
-- `http://127.0.0.1:5555/review/<job_id>`
-  - Companion review surface for runtime jobs
-- `http://127.0.0.1:5555/onboarding`
-  - Companion onboarding surface
+Root:
+
+- `GET /`
+  - returns a minimal API descriptor
 
 Legacy endpoints still work:
 
@@ -179,7 +177,6 @@ curl -X POST http://127.0.0.1:5555/v1/rewrite \
     "mode": "casual_us_human_mode",
     "surface_mode": "reply",
     "candidate_count": 3,
-    "ui_mode": "auto",
     "use_xai_judge": false
   }'
 ```
@@ -189,7 +186,6 @@ That returns:
 - stable `job_id`
 - `winner`
 - ranked `candidates`
-- optional `review_url`
 
 If a non-winner option is better for the user, choose it later with:
 
@@ -202,6 +198,13 @@ curl -X POST http://127.0.0.1:5555/v1/jobs/<job_id>/choose \
     "reason": "User preferred the alternate"
   }'
 ```
+
+Capabilities currently report:
+
+- generation provider/model
+- judge provider/model
+- practical request limits
+- supported features
 
 ## Genesis
 
