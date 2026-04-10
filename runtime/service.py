@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "storage"))
 sys.path.insert(0, str(ROOT / "rewrite"))
+sys.path.insert(0, str(ROOT / "runtime"))
 
 from runtime.runtime_ids import make_runtime_id  # noqa: E402
 from storage.runtime_db import (  # noqa: E402
@@ -34,10 +35,11 @@ from storage.runtime_db import (  # noqa: E402
     update_job_state,
 )
 from rewrite_reranker import DEFAULT_XAI_MODEL, heuristic_rerank, merge_xai_scores, run_xai_judge_scores  # noqa: E402
+from runtime.paths import resource_path, writable_path  # noqa: E402
 
-RUNTIME_DB_PATH = ROOT / "data" / "runtime" / "brotherizer_runtime.db"
-MODES_PATH = ROOT / "configs" / "brotherizer_modes.json"
-TMP_ROOT = Path(os.environ.get("BROTHERIZER_TMPDIR", ROOT / ".omx" / "state" / "tmp"))
+RUNTIME_DB_PATH = writable_path("data", "runtime", "brotherizer_runtime.db")
+MODES_PATH = resource_path("configs", "brotherizer_modes.json")
+TMP_ROOT = Path(os.environ.get("BROTHERIZER_TMPDIR", writable_path(".omx", "state", "tmp")))
 
 MAX_INPUT_CHARS = int(os.environ.get("BROTHERIZER_MAX_INPUT_CHARS", "120000"))
 MAX_CANDIDATE_COUNT = int(os.environ.get("BROTHERIZER_MAX_CANDIDATE_COUNT", "8"))

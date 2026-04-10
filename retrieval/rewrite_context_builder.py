@@ -8,16 +8,21 @@ import json
 import sys
 from pathlib import Path
 
-from donor_index import load_rows, passes_filters, lexical_score, tokenize
+try:
+    from .donor_index import load_rows, passes_filters, lexical_score, tokenize
+except ImportError:  # pragma: no cover - script-mode fallback
+    from donor_index import load_rows, passes_filters, lexical_score, tokenize
+
+from runtime.paths import resource_path
 
 ROOT = Path(__file__).resolve().parent.parent
-FORMAT_LIBRARY_PATH = ROOT / "configs" / "internet_symbol_library.json"
+FORMAT_LIBRARY_PATH = resource_path("configs", "internet_symbol_library.json")
 
 
 def resolve_mode(mode: str, explicit_query: str, explicit_bucket: str, explicit_db: Path | None) -> tuple[str, str, Path | None, str]:
     if not mode:
         return explicit_query, explicit_bucket, explicit_db, "default"
-    modes = json.loads((ROOT / "configs" / "brotherizer_modes.json").read_text())
+    modes = json.loads(resource_path("configs", "brotherizer_modes.json").read_text())
     if mode not in modes:
         raise SystemExit(f"unknown mode: {mode}")
     cfg = modes[mode]
@@ -336,9 +341,13 @@ def main() -> int:
     style_signals = []
     if resolved_db:
         ROOT = Path(__file__).resolve().parent.parent
-        sys.path.insert(0, str(ROOT / "storage"))
-        from corpus_db import connect  # type: ignore
-        from style_radar_db import connect as connect_style, query_signals  # type: ignore
+        try:
+            from storage.corpus_db import connect  # type: ignore
+            from storage.style_radar_db import connect as connect_style, query_signals  # type: ignore
+        except ImportError:  # pragma: no cover - script-mode fallback
+            sys.path.insert(0, str(ROOT / "storage"))
+            from corpus_db import connect  # type: ignore
+            from style_radar_db import connect as connect_style, query_signals  # type: ignore
 
         conn = connect(resolved_db)
         primary_bucket = preferred_bucket.split(",")[0] if preferred_bucket else ""

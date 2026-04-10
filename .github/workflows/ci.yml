@@ -1,0 +1,51 @@
+name: ci
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build
+          python -m pip install -e .
+
+      - name: Build distribution artifacts
+        run: |
+          python -m build
+
+      - name: Smoke test built wheel
+        run: |
+          tmpdir="$(mktemp -d)"
+          cd "$tmpdir"
+          python -m venv .wheel-venv
+          . .wheel-venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install "$GITHUB_WORKSPACE"/dist/*.whl
+          brotherize --help
+          brotherizer-api --help
+          brotherizer-build-corpus --help
+          brotherizer-build-style-radar --help
+          python -c 'from runtime.paths import resource_path; assert resource_path("configs", "brotherizer_modes.json").exists(); assert resource_path("data", "donor_packs", "english_v3.ndjson").exists()'
+
+      - name: Compile
+        run: |
+          python -m py_compile api/brotherizer_api.py brotherize.py runtime/service.py storage/runtime_db.py tests/test_runtime_service.py tests/test_runtime_api.py
+
+      - name: Tests
+        run: |
+          python -m unittest tests/test_runtime_service.py tests/test_runtime_api.py

@@ -7,7 +7,10 @@ import argparse
 import json
 from pathlib import Path
 
-from style_radar_db import connect, stats, upsert_signal
+try:
+    from .style_radar_db import connect, stats, upsert_signal
+except ImportError:  # pragma: no cover - script-mode fallback
+    from style_radar_db import connect, stats, upsert_signal
 
 
 def load_signals(path: Path) -> list[dict]:

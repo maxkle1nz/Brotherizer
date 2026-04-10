@@ -1,0 +1,203 @@
+{
+  "ptbr_internet": {
+    "title": "PT-BR Internet Kit",
+    "description": "Compressed Brazilian internet-native markers, pauses, reactions, and light meme formatting.",
+    "reactions": ["kkk", "aff", "mds", "pô", "né", "slk", "véi", "tipo assim"],
+    "emoticons": [":/", "._.", ":')", "😭", "🤡"],
+    "separators": ["...", "—", "//", "///"],
+    "arrows": ["->", ">>"],
+    "markdown": ["> quote", "- list", "**bold**"],
+    "formatting_moves": [
+      "short line punch",
+      "lowercase opener when casual",
+      "isolated reaction fragment",
+      "one-line closer",
+      "quoted clapback",
+      "caption-like closer"
+    ],
+    "rules": [
+      "Use at most one reaction marker unless the source already feels chaotic.",
+      "Prefer native PT-BR markers over generic emoji.",
+      "Formatting should feel like a real post, reply, or note, not decoration."
+    ]
+  },
+  "ptbr_reflective": {
+    "title": "PT-BR Reflective Kit",
+    "description": "Minimal formatting for reflective and narrative PT-BR writing.",
+    "reactions": ["..."],
+    "emoticons": [],
+    "separators": ["...", "—", "·"],
+    "arrows": [],
+    "markdown": ["> quote", "*italics*"],
+    "formatting_moves": [
+      "breathing line break",
+      "isolated closing line",
+      "quiet quote block",
+      "small italic aside"
+    ],
+    "rules": [
+      "Keep formatting sparse.",
+      "Do not inject meme markers or loud emoji.",
+      "Use spacing and line breaks as the main expressive tool."
+    ]
+  },
+  "ptbr_caption": {
+    "title": "PT-BR Caption Kit",
+    "description": "Compact PT-BR caption formatting for punchy social copy.",
+    "reactions": ["aff", "mds", "kkk", "né"],
+    "emoticons": [":/", "😭", "🤡"],
+    "separators": ["...", "//", "—"],
+    "arrows": ["->", ">>"],
+    "markdown": ["**bold**", "::caption"],
+    "formatting_moves": [
+      "caption opener",
+      "one-line punch",
+      "reaction closer",
+      "visual beat break"
+    ],
+    "rules": [
+      "Keep it short and visual.",
+      "One reaction marker is usually enough.",
+      "Caption rhythm matters more than full exposition."
+    ]
+  },
+  "casual_us_reply": {
+    "title": "Casual US Reply Kit",
+    "description": "Current American note/reply markers with lived-in internet texture.",
+    "reactions": ["yeah", "honestly", "nah", "tbh", "ngl", "kinda", "lowkey"],
+    "emoticons": [":/", ":)", "¯\\\\_(ツ)_/¯", "💀"],
+    "separators": ["...", "//", "—"],
+    "arrows": ["->"],
+    "markdown": ["> quote", "**bold**"],
+    "formatting_moves": [
+      "two-line complaint",
+      "short follow-up line",
+      "quoted pull-line",
+      "single reaction closer"
+    ],
+    "rules": [
+      "Avoid generic sparkle or celebration emoji.",
+      "One lived-in marker beats multiple cute markers.",
+      "If the source is short, keep the formatting equally compact."
+    ]
+  },
+  "english_note_reflective": {
+    "title": "English Reflective Note Kit",
+    "description": "Minimal note-like formatting for reflective English.",
+    "reactions": ["..."],
+    "emoticons": [],
+    "separators": ["...", "—", "·"],
+    "arrows": [],
+    "markdown": ["> quote", "*italics*", "::aside", "::punch"],
+    "formatting_moves": [
+      "quiet line break",
+      "isolated closer",
+      "small aside",
+      "punch line"
+    ],
+    "rules": [
+      "Keep it sparse and breathable.",
+      "Use line breaks as pacing, not decoration.",
+      "Avoid meme markers or loud emoji."
+    ]
+  },
+  "english_bio_operator": {
+    "title": "English Operator Bio Kit",
+    "description": "Clean formatting for professional bios that still feel internet-native.",
+    "reactions": [],
+    "emoticons": [],
+    "separators": ["•", "—", "·"],
+    "arrows": ["->"],
+    "markdown": ["- list", "**bold**"],
+    "formatting_moves": [
+      "operator opener",
+      "clean separator rhythm",
+      "light emphasis"
+    ],
+    "rules": [
+      "No decorative emoji.",
+      "Use formatting to clarify, not to perform.",
+      "Keep it profile-ready and compact."
+    ]
+  },
+  "british_banter": {
+    "title": "British Banter Kit",
+    "description": "Dry UK internet texture with understatement and light jabs.",
+    "reactions": ["bit much", "right", "fair enough", "if we're honest", "not ideal", "that then"],
+    "emoticons": [":/", "🙃"],
+    "separators": ["...", "—", "·"],
+    "arrows": [],
+    "markdown": ["> quote"],
+    "formatting_moves": [
+      "dry second line",
+      "understated closer",
+      "short quoted jab",
+      "very small reaction tag"
+    ],
+    "rules": [
+      "Keep it dry, not hyper.",
+      "Avoid loud meme emoji.",
+      "Use phrasing rather than symbols to carry tone."
+    ]
+  },
+  "thread_scanner": {
+    "title": "Thread Scanner Kit",
+    "description": "Formatting for thread-like internet writing that needs clear scanning structure.",
+    "reactions": [],
+    "emoticons": [],
+    "separators": ["—", "·", "---"],
+    "arrows": ["->", ">>>"],
+    "markdown": ["# title", "## subhead", "- list", "> quote"],
+    "formatting_moves": [
+      "structured opener",
+      "stacked points",
+      "pull quote line",
+      "thread separator"
+    ],
+    "rules": [
+      "Structure should help scanning.",
+      "Do not let it turn into essay formatting.",
+      "Use only the minimum shape needed."
+    ]
+  },
+  "worldwide_ironic": {
+    "title": "Worldwide Ironic Kit",
+    "description": "Internet irony markers, caps bursts, and compressed reaction formatting.",
+    "reactions": ["lol", "lmao", "tf", "yeah right", "sure man"],
+    "emoticons": ["👀", "💀", "😭"],
+    "separators": ["...", "//", "??", ">>>"],
+    "arrows": ["->", ">>>"],
+    "markdown": ["> quote", "**bold**"],
+    "formatting_moves": [
+      "caps burst",
+      "reaction closer",
+      "mock quote line",
+      "one absurd aside"
+    ],
+    "rules": [
+      "Do not overuse emoji or caps.",
+      "Keep irony legible and intentional.",
+      "Use symbols only if the donor culture would actually do it."
+    ]
+  },
+  "professional_clean": {
+    "title": "Professional Clean Kit",
+    "description": "Formatting for bios, operator-style intros, and clean internet-facing professional writing.",
+    "reactions": [],
+    "emoticons": [],
+    "separators": ["—", "•", "·"],
+    "arrows": ["->"],
+    "markdown": ["- list", "**bold**", "> quote"],
+    "formatting_moves": [
+      "clean bullet line",
+      "one-line bio rhythm",
+      "light emphasis",
+      "operator intro line"
+    ],
+    "rules": [
+      "No decorative emoji.",
+      "Use formatting for clarity, not personality inflation.",
+      "Keep the surface internet-ready but still credible."
+    ]
+  }
+}

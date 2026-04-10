@@ -221,13 +221,21 @@ That gives you:
 
 ## Quick start
 
-### 1. Create a virtualenv
+### 1. Install from a source checkout
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install requests
+python -m pip install -e .
 ```
+
+That gives you installable entrypoints such as:
+
+- `brotherizer-api`
+- `brotherize`
+- `brotherizer-build-corpus`
+- `brotherizer-build-style-radar`
+- `brotherizer-build-embeddings`
 
 ### 2. Export credentials
 
@@ -253,7 +261,7 @@ cp .runtime/brotherizer.env.example .runtime/brotherizer.env
 Build the corpus DB:
 
 ```bash
-python3 storage/build_corpus_db.py \
+brotherizer-build-corpus \
   --inputs data/donor_packs/english_v3.ndjson data/donor_packs/ptbr_v2.ndjson \
   --db data/corpus/brotherizer.db
 ```
@@ -261,7 +269,7 @@ python3 storage/build_corpus_db.py \
 Build the style radar DB:
 
 ```bash
-python3 storage/build_style_radar_db.py \
+brotherizer-build-style-radar \
   --input configs/style_radar_seed_signals.json \
   --db data/corpus/style_radar.db
 ```
@@ -269,7 +277,7 @@ python3 storage/build_style_radar_db.py \
 Optional: build embeddings for semantic retrieval:
 
 ```bash
-python3 storage/build_embedding_index.py \
+brotherizer-build-embeddings \
   --db data/corpus/brotherizer.db
 ```
 
@@ -280,7 +288,7 @@ python3 storage/build_embedding_index.py \
 Recommended mode-driven example:
 
 ```bash
-python3 brotherize.py \
+brotherize \
   --mode casual_us_human_mode \
   --text "This still sounds too polished and generic." \
   --use-xai-judge
@@ -289,7 +297,7 @@ python3 brotherize.py \
 Grounded, more restrained example:
 
 ```bash
-python3 brotherize.py \
+brotherize \
   --mode seriously_english_mode \
   --text "I think this still sounds too polished and generic." \
   --use-xai-judge
@@ -300,13 +308,13 @@ python3 brotherize.py \
 Run the API directly:
 
 ```bash
-python3 api/brotherizer_api.py
+brotherizer-api
 ```
 
 Or use the helper script:
 
 ```bash
-./scripts/start_brotherizer_api.sh
+bash scripts/start_brotherizer_api.sh
 ```
 
 By default, Brotherizer serves on `http://127.0.0.1:5555`.
@@ -356,6 +364,33 @@ Legacy wrappers:
 - `POST /rewrite`
 
 The real contract lives under `/v1/*`.
+
+## Build and release ergonomics
+
+Brotherizer now ships with a small build baseline:
+
+- [`pyproject.toml`](pyproject.toml)
+- [`Makefile`](Makefile)
+- [`Dockerfile`](Dockerfile)
+- [GitHub Actions CI](.github/workflows/ci.yml)
+
+Useful local commands:
+
+```bash
+make dev-install
+make test
+make run-api
+make build-corpus
+make build-style-radar
+make build-embeddings
+```
+
+Container build:
+
+```bash
+docker build -t brotherizer:local .
+docker run -p 5555:5555 --env-file .runtime/brotherizer.env brotherizer:local
+```
 
 ## Repo docs / wiki
 

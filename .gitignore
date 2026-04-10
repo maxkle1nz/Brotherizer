@@ -4,6 +4,9 @@ __pycache__/
 .venv/
 *.pyc
 *.pyo
+build/
+dist/
+*.egg-info/
 
 .omx/
 .runtime/brotherizer.env

@@ -15,7 +15,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scoring"))
 from composition_grounding import composition_penalty  # noqa: E402
-TMP_ROOT = Path(os.environ.get("BROTHERIZER_TMPDIR", ROOT / ".omx" / "state" / "tmp"))
+from runtime.paths import writable_path  # noqa: E402
+
+TMP_ROOT = Path(os.environ.get("BROTHERIZER_TMPDIR", writable_path(".omx", "state", "tmp")))
 
 TOKEN_RE = re.compile(r"[a-zA-ZÀ-ÿ0-9']+")
 GENERIC_PATTERNS = (

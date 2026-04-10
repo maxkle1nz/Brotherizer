@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
@@ -26,6 +27,7 @@ from runtime.service import (  # noqa: E402
     modes_payload,
     submit_rewrite,
 )
+from runtime.paths import resource_path, writable_path  # noqa: E402
 V1_JOB_PATH_RE = re.compile(r"^/v1/jobs/([^/]+)$")
 V1_CHOOSE_PATH_RE = re.compile(r"^/v1/jobs/([^/]+)/choose$")
 
@@ -108,7 +110,7 @@ class BrotherizerHandler(BaseHTTPRequestHandler):
             )
             return
         if path == "/modes":
-            self._json(HTTPStatus.OK, json.loads((ROOT / "configs" / "brotherizer_modes.json").read_text()))
+            self._json(HTTPStatus.OK, json.loads(resource_path("configs", "brotherizer_modes.json").read_text()))
             return
         if path == "/v1/modes":
             self._json(HTTPStatus.OK, modes_payload())
@@ -198,7 +200,7 @@ def recover_inflight_jobs() -> None:
     from storage.runtime_db import create_runtime_error, update_job_state  # noqa: E402
     from runtime.runtime_ids import make_runtime_id  # noqa: E402
 
-    conn = connect_runtime_db(ROOT / "data" / "runtime" / "brotherizer_runtime.db")
+    conn = connect_runtime_db(writable_path("data", "runtime", "brotherizer_runtime.db"))
     rows = conn.execute(
         "SELECT id FROM jobs WHERE status IN ('accepted','generating','reranking','judging')"
     ).fetchall()
@@ -225,9 +227,14 @@ def recover_inflight_jobs() -> None:
         )
 
 
-def main() -> int:
-    host = os.environ.get("BROTHERIZER_HOST", "127.0.0.1")
-    port = int(os.environ.get("BROTHERIZER_PORT", "5555"))
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Run the Brotherizer HTTP API.")
+    parser.add_argument("--host", default=os.environ.get("BROTHERIZER_HOST", "127.0.0.1"))
+    parser.add_argument("--port", type=int, default=int(os.environ.get("BROTHERIZER_PORT", "5555")))
+    args = parser.parse_args(argv)
+
+    host = args.host
+    port = args.port
     recover_inflight_jobs()
     server = ThreadingHTTPServer((host, port), BrotherizerHandler)
     print(json.dumps({"ok": True, "host": host, "port": port}))

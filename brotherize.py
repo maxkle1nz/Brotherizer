@@ -11,6 +11,8 @@ import sys
 import tempfile
 from pathlib import Path
 
+from runtime.paths import resource_path
+
 ROOT = Path(__file__).resolve().parent
 
 
@@ -21,7 +23,7 @@ def run_json(cmd: list[str], env: dict[str, str] | None = None) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--pack", default=str(ROOT / "data" / "donor_packs" / "english_v3.ndjson"))
+    parser.add_argument("--pack", default=str(resource_path("data", "donor_packs", "english_v3.ndjson")))
     parser.add_argument("--db", default="")
     parser.add_argument("--mode", default="")
     parser.add_argument("--text", required=True)

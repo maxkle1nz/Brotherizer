@@ -6,13 +6,17 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-import sys
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "integrations"))
+try:
+    from .corpus_db import connect, rows_missing_embeddings, upsert_embedding, stats
+    from integrations.ollama_embedder import embed_text
+except ImportError:  # pragma: no cover - script-mode fallback
+    import sys
 
-from corpus_db import connect, rows_missing_embeddings, upsert_embedding, stats
-from ollama_embedder import embed_text
+    ROOT = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(ROOT / "integrations"))
+    from corpus_db import connect, rows_missing_embeddings, upsert_embedding, stats
+    from ollama_embedder import embed_text
 
 
 def main() -> int:

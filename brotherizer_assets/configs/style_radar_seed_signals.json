@@ -1,0 +1,162 @@
+[
+  {
+    "signal_key": "british_banter_everyday",
+    "signal_type": "cultural_style",
+    "title": "British Everyday Banter",
+    "description": "Understatement, casual complaint, observational humour, mild self-deprecation, ordinary-life framing.",
+    "aesthetic_tags": ["dry", "understated", "everyday", "pub-energy"],
+    "cultural_tags": ["british", "banter", "complaint", "observational"],
+    "language_tags": ["en-GB"],
+    "meme_family": "everyday_british_absurdity",
+    "caption_style": "short observational gripe",
+    "visual_style": "ordinary scene with slightly ridiculous framing",
+    "source_platform": "brotherizer",
+    "metadata": {
+      "intended_bucket": "british_banter"
+    }
+  },
+  {
+    "signal_key": "worldwide_ironic_gaming",
+    "signal_type": "cultural_style",
+    "title": "Worldwide Ironic Gaming Voice",
+    "description": "Internet sarcasm, exaggerated reaction language, gamer complaint energy, mock outrage, meme density.",
+    "aesthetic_tags": ["loud", "meme-heavy", "compressed", "online"],
+    "cultural_tags": ["gaming", "irony", "hot-take", "forum-energy"],
+    "language_tags": ["en"],
+    "meme_family": "gamer_mock_outrage",
+    "caption_style": "all-caps punchline with complaint",
+    "visual_style": "reaction image or game screenshot with absurd caption",
+    "source_platform": "brotherizer",
+    "metadata": {
+      "intended_bucket": "worldwide_ironic"
+    }
+  },
+  {
+    "signal_key": "ptbr_casual_internet",
+    "signal_type": "cultural_style",
+    "title": "PT-BR Casual Internet Voice",
+    "description": "Directness, low-formality complaint, 'mano/cara/pô', compressed but legible internet-native Brazilian speech.",
+    "aesthetic_tags": ["casual", "compressed", "spoken", "internet-native"],
+    "cultural_tags": ["ptbr", "casual", "complaint", "social"],
+    "language_tags": ["pt-BR"],
+    "meme_family": "br_internet_commentary",
+    "caption_style": "short complaint with colloquial opener",
+    "visual_style": "screenshot, football clip, news screenshot, or absurd daily-life image",
+    "source_platform": "brotherizer",
+    "metadata": {
+      "intended_bucket": "ptbr_casual"
+    }
+  },
+  {
+    "signal_key": "ptbr_ironic_memetic",
+    "signal_type": "cultural_style",
+    "title": "PT-BR Ironic Memetic Voice",
+    "description": "Kkkk energy, ironic overstatement, absurdity, sarcasm, reaction-oriented phrase compression.",
+    "aesthetic_tags": ["ironic", "memetic", "compressed", "reaction"],
+    "cultural_tags": ["ptbr", "irony", "meme", "reaction"],
+    "language_tags": ["pt-BR"],
+    "meme_family": "br_reaction_meme",
+    "caption_style": "reaction-first, punchline-second",
+    "visual_style": "meme image, football reaction, chaotic screenshot",
+    "source_platform": "brotherizer",
+    "metadata": {
+      "intended_bucket": "ptbr_ironic"
+    }
+  },
+  {
+    "signal_key": "ptbr_reflective_human",
+    "signal_type": "cultural_style",
+    "title": "PT-BR Reflective Human Voice",
+    "description": "Reflective Brazilian Portuguese with breathing pauses, understated emotion, and natural narrative cadence without thread energy.",
+    "aesthetic_tags": ["reflective", "narrative", "breathing", "understated"],
+    "cultural_tags": ["ptbr", "reflective", "narrative", "human"],
+    "language_tags": ["pt-BR"],
+    "meme_family": "none",
+    "caption_style": "reflective line with restrained pause",
+    "visual_style": "road, room, notebook, old photo, quiet atmosphere",
+    "source_platform": "brotherizer",
+    "metadata": {
+      "intended_bucket": "ptbr_reflective"
+    }
+  },
+  {
+    "signal_key": "ptbr_professional_human",
+    "signal_type": "cultural_style",
+    "title": "PT-BR Professional Human Voice",
+    "description": "Professional Brazilian Portuguese that sounds like a real person, not a corporate brochure. Clear, credible, and lightly conversational.",
+    "aesthetic_tags": ["professional", "clear", "credible", "human"],
+    "cultural_tags": ["ptbr", "professional", "bio", "work"],
+    "language_tags": ["pt-BR"],
+    "meme_family": "none",
+    "caption_style": "professional summary with human warmth",
+    "visual_style": "clean workspace, profile card, subtle presentation deck",
+    "source_platform": "brotherizer",
+    "metadata": {
+      "intended_bucket": "ptbr_professional_human"
+    }
+  },
+  {
+    "signal_key": "en_reflective_human",
+    "signal_type": "cultural_style",
+    "title": "English Reflective Human Voice",
+    "description": "Reflective English with natural pauses, emotional restraint, and believable narrative pacing rather than polished essay rhythm.",
+    "aesthetic_tags": ["reflective", "narrative", "quiet", "human"],
+    "cultural_tags": ["english", "reflective", "narrative", "human"],
+    "language_tags": ["en"],
+    "meme_family": "none",
+    "caption_style": "quiet reflective line with a natural pause",
+    "visual_style": "road, room, notebook, old photo, muted atmosphere",
+    "source_platform": "brotherizer",
+    "metadata": {
+      "intended_bucket": "en_reflective"
+    }
+  },
+  {
+    "signal_key": "en_professional_human",
+    "signal_type": "cultural_style",
+    "title": "English Professional Human Voice",
+    "description": "Professional English that sounds like a real operator, strategist, or marketer rather than a polished corporate bio generator.",
+    "aesthetic_tags": ["professional", "clear", "human", "credible"],
+    "cultural_tags": ["english", "professional", "bio", "work"],
+    "language_tags": ["en"],
+    "meme_family": "none",
+    "caption_style": "professional summary with human directness",
+    "visual_style": "clean desk, profile page, presentation note",
+    "source_platform": "brotherizer",
+    "metadata": {
+      "intended_bucket": "en_professional_human"
+    }
+  },
+  {
+    "signal_key": "british_professional_human",
+    "signal_type": "cultural_style",
+    "title": "British Professional Human Voice",
+    "description": "Professional UK-flavoured English that sounds capable and clear without slipping into consultancy sludge.",
+    "aesthetic_tags": ["british", "professional", "clear", "understated"],
+    "cultural_tags": ["british", "professional", "bio", "work"],
+    "language_tags": ["en-GB"],
+    "meme_family": "none",
+    "caption_style": "understated professional summary",
+    "visual_style": "clean desk, slide deck, note card, quiet office",
+    "source_platform": "brotherizer",
+    "metadata": {
+      "intended_bucket": "british_professional_human"
+    }
+  },
+  {
+    "signal_key": "casual_us_human",
+    "signal_type": "cultural_style",
+    "title": "Casual US Human Voice",
+    "description": "Current American casual prose that feels like a real note or reply: direct, slightly loose, and human without sliding into deck language or bot polish.",
+    "aesthetic_tags": ["casual", "american", "direct", "human"],
+    "cultural_tags": ["us", "casual", "professional", "human"],
+    "language_tags": ["en"],
+    "meme_family": "none",
+    "caption_style": "plainspoken note or reply with low-friction phrasing",
+    "visual_style": "notes app, text thread, browser tab",
+    "source_platform": "brotherizer",
+    "metadata": {
+      "intended_bucket": "casual_us_human"
+    }
+  }
+]

@@ -1,0 +1,1 @@
+"""Packaged Brotherizer config assets."""

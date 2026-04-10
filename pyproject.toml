@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "brotherizer"
+version = "1.0.0"
+description = "The rewrite engine that gives LLM text a pulse."
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.11"
+license = "MIT"
+authors = [
+  { name = "Max Kle1nz", email = "204379921+maxkle1nz@users.noreply.github.com" }
+]
+keywords = ["llm", "rewrite", "rerank", "style-transfer", "api", "agents"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Text Processing :: Linguistic"
+]
+dependencies = [
+  "requests>=2.31,<3"
+]
+
+[project.urls]
+Homepage = "https://github.com/maxkle1nz/Brotherizer"
+Repository = "https://github.com/maxkle1nz/Brotherizer"
+Issues = "https://github.com/maxkle1nz/Brotherizer/issues"
+
+[project.scripts]
+brotherize = "brotherize:main"
+brotherizer-api = "api.brotherizer_api:main"
+brotherizer-build-corpus = "storage.build_corpus_db:main"
+brotherizer-build-style-radar = "storage.build_style_radar_db:main"
+brotherizer-build-embeddings = "storage.build_embedding_index:main"
+brotherizer-donor-query = "retrieval.donor_index:main"
+
+[tool.setuptools]
+include-package-data = true
+py-modules = ["brotherize"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["api*", "runtime*", "storage*", "retrieval*", "rewrite*", "scoring*", "integrations*", "brotherizer_assets*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+brotherizer_assets = ["configs/*.json", "data/donor_packs/*.ndjson"]

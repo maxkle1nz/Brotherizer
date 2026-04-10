@@ -1,0 +1,16 @@
+.git
+.github
+.omx
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.db
+*.db-shm
+*.db-wal
+.runtime/*.log
+.runtime/*.pid
+.runtime/brotherizer.env
+dist
+build
+*.egg-info

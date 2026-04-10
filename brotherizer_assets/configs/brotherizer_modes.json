@@ -1,0 +1,66 @@
+{
+  "british_banter_mode": {
+    "query": "british banter casual complaint",
+    "bucket": "british_banter,reply_bodies",
+    "db": "data/corpus/brotherizer.db"
+  },
+  "worldwide_ironic_mode": {
+    "query": "sarcastic online irony gaming",
+    "bucket": "worldwide_ironic,reply_bodies",
+    "db": "data/corpus/brotherizer.db"
+  },
+  "en_reflective_human_mode": {
+    "query": "english reflective human natural narrative",
+    "bucket": "en_reflective,worldwide_discussion",
+    "db": "data/corpus/brotherizer.db",
+    "profile": "narrative"
+  },
+  "en_professional_human_mode": {
+    "query": "english professional human bio natural",
+    "bucket": "en_professional_human,worldwide_discussion",
+    "db": "data/corpus/brotherizer.db",
+    "profile": "seriously"
+  },
+  "british_professional_human_mode": {
+    "query": "british understated professional bio plainspoken matter-of-fact",
+    "bucket": "british_professional_human",
+    "db": "data/corpus/brotherizer.db",
+    "profile": "british_professional"
+  },
+  "casual_us_human_mode": {
+    "query": "casual american human current direct note reply natural",
+    "bucket": "casual_us_human",
+    "db": "data/corpus/brotherizer.db",
+    "profile": "casual"
+  },
+  "ptbr_twitter_mode": {
+    "query": "ptbr casual reclamação internet-native",
+    "bucket": "ptbr_casual,ptbr_ironic,reply_bodies",
+    "db": "data/corpus/brotherizer.db",
+    "profile": "default"
+  },
+  "ptbr_narrative_human_mode": {
+    "query": "ptbr narrativo humano natural reflexivo",
+    "bucket": "ptbr_reflective,ptbr_discussion",
+    "db": "data/corpus/brotherizer.db",
+    "profile": "narrative"
+  },
+  "ptbr_professional_human_mode": {
+    "query": "ptbr bio profissional humana natural",
+    "bucket": "ptbr_professional_human,ptbr_discussion",
+    "db": "data/corpus/brotherizer.db",
+    "profile": "seriously"
+  },
+  "seriously_english_mode": {
+    "query": "english human natural grounded reflective professional rewrite",
+    "bucket": "en_professional_human,en_reflective,british_casual,worldwide_discussion,reply_bodies",
+    "db": "data/corpus/brotherizer.db",
+    "profile": "seriously"
+  },
+  "seriously_ptbr_mode": {
+    "query": "ptbr humano natural sem exagero",
+    "bucket": "reply_bodies,ptbr_casual,ptbr_discussion",
+    "db": "data/corpus/brotherizer.db",
+    "profile": "seriously"
+  }
+}

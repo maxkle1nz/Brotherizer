@@ -7,7 +7,10 @@ import argparse
 import json
 from pathlib import Path
 
-from corpus_db import connect, stats, upsert_rows
+try:
+    from .corpus_db import connect, stats, upsert_rows
+except ImportError:  # pragma: no cover - script-mode fallback
+    from corpus_db import connect, stats, upsert_rows
 
 
 def load_rows(paths: list[Path]) -> list[dict]:

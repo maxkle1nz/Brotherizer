@@ -54,12 +54,16 @@ def main() -> int:
         raise SystemExit("use --pack or --db")
 
     if args.db:
-        import sys
-        ROOT = Path(__file__).resolve().parent.parent
-        sys.path.insert(0, str(ROOT / "storage"))
-        sys.path.insert(0, str(ROOT / "integrations"))
-        from corpus_db import connect, query_rows, semantic_query_rows  # type: ignore
-        from ollama_embedder import embed_text  # type: ignore
+        try:
+            from storage.corpus_db import connect, query_rows, semantic_query_rows  # type: ignore
+            from integrations.ollama_embedder import embed_text  # type: ignore
+        except ImportError:  # pragma: no cover - script-mode fallback
+            import sys
+            ROOT = Path(__file__).resolve().parent.parent
+            sys.path.insert(0, str(ROOT / "storage"))
+            sys.path.insert(0, str(ROOT / "integrations"))
+            from corpus_db import connect, query_rows, semantic_query_rows  # type: ignore
+            from ollama_embedder import embed_text  # type: ignore
 
         conn = connect(args.db)
         if args.semantic:
