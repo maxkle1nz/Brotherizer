@@ -1,9 +1,0 @@
-{
-  "startUrls": [
-    "https://www.reddit.com/r/CasualUK/",
-    "https://www.reddit.com/r/brasil/",
-    "https://www.reddit.com/r/futebol/"
-  ],
-  "maxItems": 30,
-  "sort": "new"
-}
