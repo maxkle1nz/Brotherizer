@@ -25,7 +25,9 @@ Brotherizer still ships:
 
 - [Building Databases](BUILDING_DATABASES.md)
 - [Donor Packs](DONOR_PACKS.md)
+- [Providers](PROVIDERS.md)
 - [Style Radar](STYLE_RADAR.md)
 - [Contributing](CONTRIBUTING.md)
 - [Language Coverage](LANGUAGE_COVERAGE.md)
 - [Safety and Sanitization](SAFETY_AND_SANITIZATION.md)
+- [Shipped vs Not Shipped](SHIPPED_VS_NOT_SHIPPED.md)

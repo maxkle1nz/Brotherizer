@@ -18,6 +18,8 @@ Legacy wrappers still exist:
 - `GET /modes`
 - `POST /rewrite`
 
+Compatibility details live in [Legacy Wrappers and Compatibility](LEGACY_WRAPPERS_AND_COMPATIBILITY.md).
+
 ## Default host and port
 
 By default:
@@ -54,6 +56,25 @@ Notes:
 - `candidate_count` defaults to `3`
 - `use_xai_judge` enables the optional Grok judge lane
 
+## `GET /v1/capabilities`
+
+Current shipped capability groups:
+
+- `providers`
+- `limits`
+- `features`
+
+What they mean:
+
+- `providers.generation` describes the fast rewrite lane
+- `providers.judge` describes the optional judge lane
+- `limits.max_input_chars` is the practical input ceiling enforced by the runtime
+- `limits.max_candidate_count` is the supported candidate cap
+- `limits.supports_document_rewrite` is currently `false`
+- `features.surface_mode` indicates surface-aware rewriting is supported
+- `features.choose_candidate` indicates winner override is supported
+- `features.streaming` is currently `false`
+
 ## `GET /v1/jobs/:id`
 
 Returns the full persisted job shape, including:
@@ -66,6 +87,37 @@ Returns the full persisted job shape, including:
 - timestamps
 - request metadata
 - provider/model insight
+
+## `GET /`
+
+The root endpoint is a small descriptor surface.
+
+It is useful for:
+
+- quick service discovery
+- local smoke checks
+- simple clients that want to enumerate endpoints without fetching the full docs
+
+Current response shape:
+
+```json
+{
+  "ok": true,
+  "service": "brotherizer",
+  "api": "v1",
+  "endpoints": [
+    "/v1/health",
+    "/v1/modes",
+    "/v1/capabilities",
+    "/v1/rewrite",
+    "/v1/jobs/:id",
+    "/v1/jobs/:id/choose",
+    "/health",
+    "/modes",
+    "/rewrite"
+  ]
+}
+```
 
 ## `POST /v1/jobs/:id/choose`
 
@@ -89,6 +141,8 @@ This updates:
 - choice history
 
 It does **not** erase the original `winner`.
+
+Full lifecycle details live in [Runtime Lifecycle and Recovery](RUNTIME_LIFECYCLE_AND_RECOVERY.md).
 
 ## Job states
 

@@ -34,6 +34,19 @@ If you can articulate a real surface behavior the runtime should know about, sty
 5. test a few rewrites
 6. open a PR with a clear explanation of the language/register added
 
+## Acceptance checklist
+
+Before opening a PR, check all of these:
+
+- the pack is text-only
+- identity-bearing metadata is gone
+- no local DB files are being committed
+- no secrets are present
+- the language/register being added is clearly described
+- the corpus DB can be rebuilt locally from the submitted pack
+- optional embedding rebuild was tested if your contribution depends on semantic retrieval
+- a few rewrites were manually checked for obvious drift
+
 ## Contribution rules
 
 - one language per pack
@@ -42,6 +55,7 @@ If you can articulate a real surface behavior the runtime should know about, sty
 - no keys
 - no raw dumps of unreviewed scraped material
 - no detector-evasion framing
+- do not commit generated `.db` artifacts unless a maintainer explicitly asks for them
 
 ## What we want from contributors
 

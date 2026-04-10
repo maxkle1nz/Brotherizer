@@ -2,13 +2,15 @@
 
 > The rewrite engine that gives LLM text a pulse.
 
-LLM text can be technically correct and still feel socially dead. Brotherizer exists for that exact problem.
+Brotherizer gives LLM text a pulse when the model is right on facts and flat on feeling.
 
-It is an API-first style-retrieval, rewrite, and reranking system for teams, agents, and products that already generate text with models but want the output to sound warmer, sharper, more human, and less like it was polished by a committee of very anxious robots.
+It pulls from donor writing, rewrites for the right surface, and reranks until one version actually lands.
 
-No detector cosplay. No fake-human sludge. No polished-for-no-reason copy.
+Think of it as voice middleware for teams that want less committee and more human.
 
-Just better text.
+No detector theater. No fake warmth. No polished-for-no-reason copy.
+
+Just text that sounds awake instead of overmanaged.
 
 ## What Brotherizer is
 
@@ -88,13 +90,9 @@ Current defaults in the repo:
 
 Earlier Grok reasoning variants can still be used by setting `BROTHERIZER_XAI_MODEL`. The public docs explain this in more detail in [`docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md`](docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md).
 
-## The research system is still here
+## Research, public and on purpose
 
-It was **not** removed.
-
-What changed is the public framing.
-
-The live scraping and internal acquisition lanes are no longer part of the public repo, but the public research substrate is still very real:
+Brotherizer ships with a real public research substrate:
 
 - donor packs under [`data/donor_packs/`](data/donor_packs/)
 - corpus DB builder
@@ -103,9 +101,17 @@ The live scraping and internal acquisition lanes are no longer part of the publi
 - formatting / internet-symbol packs
 - retrieval selectors that feed the rewrite engine
 
+What does **not** ship publicly anymore is the private acquisition layer.
+
+That distinction matters:
+
+- the public repo still teaches you how the system thinks
+- it just does not ship private collection machinery or secret-bearing ops lanes
+
 If you want the full public explanation, go here:
 
 - [`docs/wiki/HOW_IT_WORKS.md`](docs/wiki/HOW_IT_WORKS.md)
+- [`docs/wiki/RETRIEVAL_ARCHITECTURE.md`](docs/wiki/RETRIEVAL_ARCHITECTURE.md)
 - [`docs/wiki/LOCAL_SETUP_AND_DATABASES.md`](docs/wiki/LOCAL_SETUP_AND_DATABASES.md)
 - [`RESEARCH/README.md`](RESEARCH/README.md)
 
@@ -128,6 +134,14 @@ Brotherizer ships with multiple voice families, including:
 - `seriously_ptbr_mode`
 
 Defined in [`configs/brotherizer_modes.json`](configs/brotherizer_modes.json).
+
+Quick mental model:
+
+- use `casual_us_human_mode` when you want the line to sound current and lived-in
+- use `en_reflective_human_mode` when the text should breathe a little more
+- use `british_professional_human_mode` when you want restraint, not brochure polish
+- use `seriously_*` modes when the source already has weight and does not need extra performance
+- use the PT-BR modes when the text needs to stay culturally native instead of getting flattened into generic “international AI Portuguese”
 
 ### 2. Surface-aware rewriting
 
@@ -346,6 +360,10 @@ Most useful pages:
 - [`docs/wiki/POSITIONING.md`](docs/wiki/POSITIONING.md)
 - [`docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md`](docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md)
 - [`docs/wiki/API_REFERENCE.md`](docs/wiki/API_REFERENCE.md)
+- [`docs/wiki/RUNTIME_LIFECYCLE_AND_RECOVERY.md`](docs/wiki/RUNTIME_LIFECYCLE_AND_RECOVERY.md)
+- [`docs/wiki/LEGACY_WRAPPERS_AND_COMPATIBILITY.md`](docs/wiki/LEGACY_WRAPPERS_AND_COMPATIBILITY.md)
+- [`docs/wiki/RETRIEVAL_ARCHITECTURE.md`](docs/wiki/RETRIEVAL_ARCHITECTURE.md)
+- [`docs/wiki/FORMATTING_PACKS_AND_SYMBOL_LIBRARY.md`](docs/wiki/FORMATTING_PACKS_AND_SYMBOL_LIBRARY.md)
 - [`docs/wiki/SECURITY_AND_SECRETS.md`](docs/wiki/SECURITY_AND_SECRETS.md)
 
 Research and corpus-building docs:
@@ -353,11 +371,22 @@ Research and corpus-building docs:
 - [`RESEARCH/README.md`](RESEARCH/README.md)
 - [`RESEARCH/BUILDING_DATABASES.md`](RESEARCH/BUILDING_DATABASES.md)
 - [`RESEARCH/DONOR_PACKS.md`](RESEARCH/DONOR_PACKS.md)
+- [`RESEARCH/PROVIDERS.md`](RESEARCH/PROVIDERS.md)
 - [`RESEARCH/CONTRIBUTING.md`](RESEARCH/CONTRIBUTING.md)
+- [`RESEARCH/SHIPPED_VS_NOT_SHIPPED.md`](RESEARCH/SHIPPED_VS_NOT_SHIPPED.md)
 
 ## Contributing
 
-Brotherizer gets stronger when the donor packs get better.
+Brotherizer gets stronger when the voice library gets stronger.
+
+That means the best contributions are often not “one more endpoint.”
+
+They are:
+
+- a cleaner donor pack
+- a sharper register
+- a language the repo barely covers today
+- a better note / reply / caption surface
 
 We especially want:
 
@@ -367,6 +396,8 @@ We especially want:
 - better note / reply / caption coverage
 
 If you can build a clean, text-only donor pack in your language, we want it.
+
+If you can build two, even better. The machine has no shame and would like to sound less generic in more countries.
 
 Please keep identity out of the data:
 
@@ -380,6 +411,7 @@ Please keep identity out of the data:
 Start here:
 
 - [`RESEARCH/CONTRIBUTING.md`](RESEARCH/CONTRIBUTING.md)
+- [`RESEARCH/PROVIDERS.md`](RESEARCH/PROVIDERS.md)
 - [`RESEARCH/SAFETY_AND_SANITIZATION.md`](RESEARCH/SAFETY_AND_SANITIZATION.md)
 - [`RESEARCH/LANGUAGE_COVERAGE.md`](RESEARCH/LANGUAGE_COVERAGE.md)
 
