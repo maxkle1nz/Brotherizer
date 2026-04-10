@@ -11,7 +11,7 @@ This repo currently contains:
 - donor-pack builders and persistent corpus storage
 - semantic retrieval with local embeddings
 - rewrite generation, reranking, and mode-based routing
-- a local API plus daemon scripts for Genesis
+- a local runtime API, companion UI, and daemon scripts for Genesis
 
 ## Why this starter
 
@@ -113,17 +113,41 @@ python brotherize.py \
   --use-xai-judge
 ```
 
+Notes:
+
+- rewrite generation currently runs through **Perplexity Sonar**
+- the xAI lane is optional and currently used as a **judge**
+- current xAI default in code is `grok-4.20-reasoning`
+
 ### 6. Run the local API
 
 ```bash
 python api/brotherizer_api.py
 ```
 
-This now also serves the first local workspace UI:
+This serves three surfaces:
 
 - `http://127.0.0.1:5555/`
+  - legacy workspace UI
+- `http://127.0.0.1:5555/review/<job_id>`
+  - Companion review surface for runtime jobs
+- `http://127.0.0.1:5555/onboarding`
+  - Companion onboarding surface
+
+Legacy endpoints still work:
+
+- `GET /health`
 - `GET /modes`
 - `POST /rewrite`
+
+Canonical runtime endpoints:
+
+- `GET /v1/health`
+- `GET /v1/modes`
+- `GET /v1/capabilities`
+- `POST /v1/rewrite`
+- `GET /v1/jobs/:id`
+- `POST /v1/jobs/:id/choose`
 
 Or use the daemon helpers:
 
@@ -142,6 +166,40 @@ curl -X POST http://127.0.0.1:5555/rewrite \
     "mode": "ptbr_twitter_mode",
     "db": "data/corpus/brotherizer.db",
     "use_xai_judge": true
+  }'
+```
+
+Canonical runtime request:
+
+```bash
+curl -X POST http://127.0.0.1:5555/v1/rewrite \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "text": "I think this sounds too polished and generic.",
+    "mode": "casual_us_human_mode",
+    "surface_mode": "reply",
+    "candidate_count": 3,
+    "ui_mode": "auto",
+    "use_xai_judge": false
+  }'
+```
+
+That returns:
+
+- stable `job_id`
+- `winner`
+- ranked `candidates`
+- optional `review_url`
+
+If a non-winner option is better for the user, choose it later with:
+
+```bash
+curl -X POST http://127.0.0.1:5555/v1/jobs/<job_id>/choose \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "candidate_id": "<candidate_id>",
+    "actor": { "type": "client", "id": "codex" },
+    "reason": "User preferred the alternate"
   }'
 ```
 
