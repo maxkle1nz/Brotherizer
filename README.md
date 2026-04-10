@@ -11,7 +11,7 @@ This repo currently contains:
 - donor-pack builders and persistent corpus storage
 - semantic retrieval with local embeddings
 - rewrite generation, reranking, and mode-based routing
-- a local runtime API, companion UI, and daemon scripts for Genesis
+- a local runtime API and daemon scripts for Genesis
 
 ## Why this starter
 
