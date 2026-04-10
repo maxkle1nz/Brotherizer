@@ -50,4 +50,4 @@ include = ["api*", "runtime*", "storage*", "retrieval*", "rewrite*", "scoring*",
 namespaces = true
 
 [tool.setuptools.package-data]
-brotherizer_assets = ["configs/*.json", "data/donor_packs/*.ndjson"]
+brotherizer_assets = ["configs/*.json", "data/donor_packs/*.ndjson", "demo/*.html"]

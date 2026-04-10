@@ -78,6 +78,12 @@ The result is simple:
 - get ranked options back
 - keep the winner, or override it
 
+Want the quick visual version first?
+
+- run the API
+- open `/demo`
+- drag the slider until the line stops sounding embalmed
+
 ## Current model stack
 
 Brotherizer is explicit about the model split it ships with today:
@@ -356,6 +362,7 @@ Canonical endpoints:
 - `POST /v1/rewrite`
 - `GET /v1/jobs/:id`
 - `POST /v1/jobs/:id/choose`
+- `GET /demo`
 
 Legacy wrappers:
 
@@ -383,6 +390,12 @@ make run-api
 make build-corpus
 make build-style-radar
 make build-embeddings
+```
+
+Interactive demo:
+
+```bash
+open http://127.0.0.1:5555/demo
 ```
 
 Container build:
