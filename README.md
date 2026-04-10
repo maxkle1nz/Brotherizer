@@ -2,9 +2,9 @@
 
 > The rewrite engine that gives LLM text a pulse.
 
-Brotherizer gives LLM text a pulse when the model is right on facts and flat on feeling.
+Brotherizer gives LLM text a pulse when the model lands the facts but goes flat on feeling.
 
-It pulls from donor writing, rewrites for the right surface, and reranks until one version actually lands.
+It pulls from donor writing, rewrites for the right surface, and reranks until something actually sticks.
 
 Think of it as voice middleware for teams that want less committee and more human.
 
@@ -14,16 +14,16 @@ Just text that sounds awake instead of overmanaged.
 
 ## What Brotherizer is
 
-Brotherizer is a narrow product on purpose:
+Brotherizer stays narrow by design:
 
 - it retrieves donor writing patterns
-- it rewrites for the right mode and surface
+- it rewrites for the mode and surface you actually need
 - it reranks multiple candidates
-- it lets the client keep the winner or choose another option
+- it lets the client keep the winner or choose another option later
 
 Think of it as voice middleware for LLM output.
 
-If your model already knows what to say but keeps saying it like a brand-safe hostage statement, this is the lane.
+If your model already knows what to say but keeps saying it like it had to clear legal first, this is the lane.
 
 ## What it is not
 
@@ -34,7 +34,7 @@ Brotherizer is not:
 - a full writing app
 - a detector-evasion gimmick
 
-The point is not to make text look "less AI" in some scammy benchmark sense.
+The point is not to make text look less AI just to win a benchmark.
 
 The point is to make it sound more like a person actually meant it.
 
@@ -70,13 +70,13 @@ The result is simple:
 
 ## Current model stack
 
-Brotherizer does not pretend all providers are interchangeable. The repo ships with a specific split today:
+Brotherizer is explicit about the model split it ships with today:
 
 - **Generation lane:** Perplexity Sonar
 - **Judge lane:** xAI Grok reasoning models
 - **Optional semantic retrieval lane:** local Ollama embeddings
 
-In practice, that means:
+In practice, that split looks like this:
 
 - **Perplexity Sonar** handles the fast rewrite pass
 - **Grok** handles the optional judgment-heavy pass when selection quality matters more than speed
@@ -88,11 +88,11 @@ Current defaults in the repo:
 - judge model: `grok-4.20-reasoning`
 - embedding model: `nomic-embed-text`
 
-Earlier Grok reasoning variants can still be used by setting `BROTHERIZER_XAI_MODEL`. The public docs explain this in more detail in [`docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md`](docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md).
+You can still point the judge lane at earlier Grok reasoning variants by setting `BROTHERIZER_XAI_MODEL`. The public docs explain the split in more detail in [`docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md`](docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md).
 
 ## Research, public and on purpose
 
-Brotherizer ships with a real public research substrate:
+Brotherizer ships with a public research substrate. It is the part contributors can inspect, rebuild, and extend:
 
 - donor packs under [`data/donor_packs/`](data/donor_packs/)
 - corpus DB builder
@@ -101,14 +101,14 @@ Brotherizer ships with a real public research substrate:
 - formatting / internet-symbol packs
 - retrieval selectors that feed the rewrite engine
 
-What does **not** ship publicly anymore is the private acquisition layer.
+What is intentionally not public is the private collection layer.
 
-That distinction matters:
+That is deliberate:
 
-- the public repo still teaches you how the system thinks
-- it just does not ship private collection machinery or secret-bearing ops lanes
+- the public repo still shows how the system thinks
+- it just does not include collection machinery or internal ops lanes
 
-If you want the full public explanation, go here:
+If you want the longer public explanation, start here:
 
 - [`docs/wiki/HOW_IT_WORKS.md`](docs/wiki/HOW_IT_WORKS.md)
 - [`docs/wiki/RETRIEVAL_ARCHITECTURE.md`](docs/wiki/RETRIEVAL_ARCHITECTURE.md)
@@ -135,13 +135,13 @@ Brotherizer ships with multiple voice families, including:
 
 Defined in [`configs/brotherizer_modes.json`](configs/brotherizer_modes.json).
 
-Quick mental model:
+Quick mode picker:
 
-- use `casual_us_human_mode` when you want the line to sound current and lived-in
-- use `en_reflective_human_mode` when the text should breathe a little more
-- use `british_professional_human_mode` when you want restraint, not brochure polish
-- use `seriously_*` modes when the source already has weight and does not need extra performance
-- use the PT-BR modes when the text needs to stay culturally native instead of getting flattened into generic “international AI Portuguese”
+- use `casual_us_human_mode` for lines that need to feel current and lived-in
+- use `en_reflective_human_mode` when you want the text to breathe a bit more
+- use `british_professional_human_mode` for restraint, without brochure polish
+- use `seriously_*` modes if the source already carries weight; no extra performance needed
+- use the PT-BR modes to keep things culturally native, not flattened into generic international Portuguese
 
 ### 2. Surface-aware rewriting
 
@@ -377,9 +377,9 @@ Research and corpus-building docs:
 
 ## Contributing
 
-Brotherizer gets stronger when the voice library gets stronger.
+Brotherizer only gets as good as the voice library.
 
-That means the best contributions are often not “one more endpoint.”
+That means the best contributions are usually not another endpoint.
 
 They are:
 
@@ -417,7 +417,7 @@ Start here:
 
 ## Positioning
 
-Brotherizer sits between a brand-voice system and LLM middleware.
+Brotherizer lives between brand-voice systems and LLM middleware.
 
 It is closer to:
 
@@ -433,9 +433,9 @@ It is not trying to be:
 - LangSmith
 - an "undetectable AI" circus
 
-Those are adjacent categories. Brotherizer's lane is tighter:
+Those sit nearby. Brotherizer's lane stays narrow:
 
-**retrieve the right texture, rewrite the line, rerank the options, and keep the one that actually sounds alive.**
+**retrieve the right texture, rewrite the line, rerank the options, and keep what sounds alive.**
 
 ## Verification
 

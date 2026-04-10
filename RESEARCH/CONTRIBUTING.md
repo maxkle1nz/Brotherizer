@@ -1,64 +1,58 @@
-# Contributing
+# Contributing to Brotherizer
 
-The most useful contributions to Brotherizer are often not new endpoints.
+The most valuable things you can add here are usually not new endpoints. They are solid donor packs. That is where the repo needs help most:
 
-They are better donor packs.
+- fresh languages
+- better coverage across registers
+- clean, pro-sounding voices
+- punchier surfaces for replies, captions, notes
 
-Especially:
+## Where to focus
 
-- new languages
-- better register coverage
-- cleaner professional voices
-- stronger reply / caption / note surfaces
+### 1. New languages
 
-## High-value contribution lanes
+If you have a clean donor pack for a language we barely cover, that is one of the strongest contributions you can make.
 
-### 1. New language packs
+### 2. Leveling up existing ones
 
-If you can contribute a clean donor pack in a language the repo barely covers, that is gold.
+Even in languages we already cover, quality beats raw row count.
 
-### 2. Better existing packs
+### 3. Style radar tweaks
 
-Even in covered languages, pack quality matters more than raw row count.
+If you spot a real behavior the runtime is missing, style radar is the right place to add it.
 
-### 3. Style radar expansion
+## How to contribute
 
-If you can articulate a real surface behavior the runtime should know about, style radar is the right place to contribute it.
+1. Build or grow a sanitized donor pack.
+2. Run it through the sanitization checklist.
+3. Rebuild the corpus DB on your machine.
+4. Rebuild embeddings if you want (optional).
+5. Test a handful of rewrites.
+6. open the PR with a short note on what is new: language, register, or signal set
 
-## Contribution workflow
+## Before you PR
 
-1. create or extend a sanitized donor pack
-2. run the pack through the sanitization checklist
-3. rebuild the corpus DB locally
-4. optionally rebuild embeddings
-5. test a few rewrites
-6. open a PR with a clear explanation of the language/register added
+Hit all these:
 
-## Acceptance checklist
+- text-only pack
+- no identity-bearing material left
+- zero local DB files committed
+- no secrets
+- clear description of the language/register
+- corpus DB rebuilds cleanly from the pack locally
+- embedding rebuild tested if semantic retrieval is part of the contribution
+- spot-checked rewrites for drift
 
-Before opening a PR, check all of these:
-
-- the pack is text-only
-- identity-bearing metadata is gone
-- no local DB files are being committed
-- no secrets are present
-- the language/register being added is clearly described
-- the corpus DB can be rebuilt locally from the submitted pack
-- optional embedding rebuild was tested if your contribution depends on semantic retrieval
-- a few rewrites were manually checked for obvious drift
-
-## Contribution rules
+## Rules
 
 - one language per pack
 - text only
-- no identity-bearing metadata
+- strip identity metadata
 - no keys
-- no raw dumps of unreviewed scraped material
-- no detector-evasion framing
-- do not commit generated `.db` artifacts unless a maintainer explicitly asks for them
+- no unvetted scraped dumps
+- no detector-dodging framing
+- do not commit `.db` files unless a maintainer explicitly asks for them
 
-## What we want from contributors
+## What we need
 
-Brotherizer needs more databases in more languages.
-
-If you can help build that carefully, you are not adding fluff. You are expanding the real usable surface of the product.
+Brotherizer needs more databases in more languages. If you can help build that carefully, you are making the whole system more usable.

@@ -2,7 +2,7 @@
 
 Welcome to the Brotherizer wiki.
 
-If this folder is mirrored into a GitHub Wiki, this page is the intended landing page.
+This is the front door if the folder ever gets mirrored into a GitHub Wiki.
 
 Start here:
 
@@ -19,6 +19,6 @@ Start here:
 - [Security and Secrets](SECURITY_AND_SECRETS.md)
 - [FAQ](FAQ.md)
 
-Research docs live here:
+Research and corpus docs live one level up. They keep the retrieval substrate, database builders, and contributor guidance in one place.
 
 - [`RESEARCH/README.md`](../../RESEARCH/README.md)

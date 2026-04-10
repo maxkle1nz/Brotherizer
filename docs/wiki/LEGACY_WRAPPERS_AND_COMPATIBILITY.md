@@ -1,26 +1,22 @@
 # Legacy Wrappers and Compatibility
 
-Brotherizer still ships a small legacy surface for compatibility:
+Brotherizer still ships a slim legacy surface for older clients and quick scripts, but `/v1/*` is the contract to build against.
 
 - `GET /health`
 - `GET /modes`
 - `POST /rewrite`
 
-But the canonical contract is:
-
-- `/v1/*`
-
 ## Why the legacy surface exists
 
-To keep older clients and quick scripts alive while the runtime grows up.
+It keeps old callers alive while the runtime grows up.
 
 ## Legacy vs canonical
 
 ### Health
 
 - `GET /health`
-  - small legacy health payload
-  - returns:
+  - small legacy payload
+  - returns the basic service shape
 
 ```json
 {
@@ -30,15 +26,14 @@ To keep older clients and quick scripts alive while the runtime grows up.
 }
 ```
 - `GET /v1/health`
-  - canonical runtime health payload with version/time/runtime details
+  - canonical runtime health payload with version, time, and runtime details
 
 ### Modes
 
 - `GET /modes`
-  - raw mode config style response
-  - returns the underlying mode config object keyed by mode slug
+  - raw config-shaped response keyed by mode slug
 - `GET /v1/modes`
-  - canonical normalized mode listing for clients
+  - normalized client-facing mode listing
   - returns `slug`, `label`, and inferred `surfaces`
 
 ### Rewrite
@@ -49,7 +44,7 @@ To keep older clients and quick scripts alive while the runtime grows up.
 - `POST /v1/rewrite`
   - canonical runtime response
   - durable job shape
-  - richer request/insight/error semantics
+  - richer request, insight, and error semantics
 
 #### What the legacy rewrite wrapper keeps
 
@@ -82,4 +77,4 @@ If you are integrating Brotherizer today:
 - build against `/v1/*`
 - treat legacy wrappers as compatibility-only
 
-That way you get the real runtime semantics instead of the historical shortcut surface.
+That way you get the runtime semantics, not the historical shortcut surface.

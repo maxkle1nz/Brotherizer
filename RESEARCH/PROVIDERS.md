@@ -1,84 +1,55 @@
 # Providers
 
-Brotherizer uses different providers for different jobs.
-
-That is deliberate.
+Brotherizer routes different tasks to different providers. That is not accidental. It is how the system stays focused.
 
 ## Perplexity
 
-Role:
+**Role:** fast rewrite generation
 
-- fast rewrite generation
-
-What it powers:
-
+**What it powers:**
 - `rewrite_executor.py`
-- the first-pass candidate generation lane
+- The first-pass candidate generation lane
 
-What key it needs:
+**Requires:** `PERPLEXITY_API_KEY`
 
-- `PERPLEXITY_API_KEY`
-
-Without it:
-
-- runtime generation will not work
-- the API can still boot, but rewrite generation requests will fail
+**If missing:** the API still boots, but runtime rewrite generation requests fail.
 
 ## xAI / Grok
 
-Role:
+**Role:** optional judgment-heavy reranking
 
-- optional judgment-heavy reranking
-
-What it powers:
-
+**What it powers:**
 - `xai_judge.py`
-- the optional judge lane in the runtime
+- The optional judge lane in the runtime
 
-Current default:
+**Current model:** `grok-4.20-reasoning`
 
-- `grok-4.20-reasoning`
+Earlier reasoning-capable Grok variants work via `BROTHERIZER_XAI_MODEL`.
 
-Earlier reasoning-capable Grok variants can still be used through `BROTHERIZER_XAI_MODEL`.
+**Requires:** `XAI_API_KEY`
 
-What key it needs:
-
-- `XAI_API_KEY`
-
-Without it:
-
-- the judge lane is disabled
-- the main rewrite flow can still run without judging
+**If missing:** the judge lane is disabled and the main rewrite flow continues unchanged.
 
 ## Ollama
 
-Role:
+**Role:** optional local embeddings
 
-- optional local embeddings
-
-What it powers:
-
+**What it powers:**
 - `build_embedding_index.py`
-- optional semantic donor retrieval
+- Optional semantic donor retrieval
 
-What it needs:
+**Requires:**
+- A local Ollama instance
+- A compatible embedding model (default: `nomic-embed-text`)
 
-- a local Ollama instance
-- a compatible embedding model, default `nomic-embed-text`
+**If missing:** Lexical and database retrieval continue. Semantic retrieval does not.
 
-Without it:
+## Why this architecture
 
-- lexical/database retrieval still works
-- semantic retrieval will not
+Generation and judgment are different problems. Brotherizer separates them intentionally:
 
-## Why the split exists
+- A fast lane for generation
+- A reasoning-focused lane for harder decisions
+- A local lane for optional semantic work
 
-Generation and judgment are not the same job.
-
-Brotherizer prefers:
-
-- a fast lane for generation
-- a reasoning-heavy lane for harder selection calls
-- a local lane for optional semantic retrieval
-
-That gives the product better control than pretending one provider should do everything equally well.
+This gives Brotherizer better control than asking one provider to handle every part of the job equally well.

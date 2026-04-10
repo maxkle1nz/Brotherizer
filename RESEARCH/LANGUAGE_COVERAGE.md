@@ -4,11 +4,11 @@ Brotherizer already has useful coverage in:
 
 - English
 - Portuguese (Brazil)
-- a few English sub-registers such as reflective, casual US, and understated British professional
+- a few English styles such as reflective, casual US, and understated British professional
 
-## What we want more of
+## Areas for Growth
 
-High-priority expansion lanes:
+**High-priority languages:**
 
 - Spanish
 - French
@@ -19,25 +19,30 @@ High-priority expansion lanes:
 - Hindi
 - Arabic
 
-High-priority register gaps:
+**High-priority styles:**
 
-- clean professional bios
-- reflective note-writing
-- sharp reply surfaces
-- caption-native writing
-- restrained technical writing that still sounds human
+- Clean professional bios
+- Reflective note-writing
+- Sharp, direct replies
+- Caption-style writing
+- Restrained technical writing that stays human
 
-## What a good new language contribution looks like
+## Guidelines for Contributions
 
-- one language at a time
-- clear `lang_hint`
-- coherent `voice_bucket`
-- text-only rows
-- topic tags that help retrieval
-- sample rewrites tested locally
+Focus on one language at a time.
 
-## Why this matters
+Use a clear `lang_hint`.
 
-Brotherizer gets more interesting as a multilingual system.
+Keep `voice_bucket` coherent.
 
-The more languages and registers it can retrieve from cleanly, the less it has to fake voice from thin air.
+Stick to text-only rows.
+
+Add topic tags for better retrieval.
+
+Test sample rewrites locally.
+
+## Why it matters
+
+Brotherizer gets more useful as a multilingual system when it draws from real coverage across languages and styles.
+
+That cuts down on guesswork and lets the runtime retrieve and adapt more naturally.

@@ -1,19 +1,21 @@
 # How It Works
 
-Brotherizer is a retrieval-conditioned rewrite system with reranking and durable runtime choices.
+Brotherizer manages retrieval-conditioned rewriting, with reranking and runtime choices that actually stick.
 
 ## 1. Retrieve donor texture
 
-Brotherizer starts by selecting donor snippets from either:
+Brotherizer starts by pulling donor snippets from either:
 
 - shipped donor-pack files
 - the local corpus database
 
 By default, the runtime relies on lexical/FTS-style retrieval. Optional semantic retrieval exists through local embeddings, but it is not the default production rewrite path in this repo.
 
+That matters because Brotherizer does not start from a blank page. It starts from writing that already has texture.
+
 ## 2. Resolve mode and surface
 
-Modes define the broad voice family.
+**Modes** define the broad voice family.
 
 Examples:
 
@@ -22,7 +24,7 @@ Examples:
 - understated British professional
 - PT-BR internet-native
 
-Surfaces define the delivery context.
+**Surfaces** define the delivery context.
 
 Examples:
 
@@ -49,13 +51,13 @@ Brotherizer then builds a conditioning payload that includes:
 - style radar signals
 - formatting pack
 
-That is the bridge between raw retrieval and generation.
+This is the bridge between raw retrieval and generation.
 
 ## 4. Generate multiple candidates
 
 The repo currently uses **Perplexity Sonar** for the first-pass generation lane.
 
-Brotherizer does not ask for one answer and call it a day. It asks for several candidates because selection quality matters, especially when multiple lines preserve the meaning but only one actually sounds right.
+Brotherizer does not ask for one answer and hope for the best. It asks for several candidates because selection quality matters. Multiple lines can preserve the meaning. Usually only one actually lands.
 
 ## 5. Rerank
 
@@ -68,7 +70,7 @@ Candidates are reranked using:
 - composition grounding
 - optional xAI judge score
 
-This is the part many rewrite tools skip. Brotherizer does not.
+This is where many rewrite tools get lazy. Brotherizer does not.
 
 ## 6. Optional judge lane
 
@@ -104,4 +106,4 @@ Brotherizer is:
 
 `retrieve -> rewrite -> rerank -> choose`
 
-It is not trying to be more mystical than that.
+Nothing more mystical than that.

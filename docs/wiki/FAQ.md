@@ -2,53 +2,48 @@
 
 ## Did you remove the research system?
 
-No.
+No. It is still here.
 
-The public repo still ships:
+The repo still ships donor packs, corpus DB builders, style radar, formatting packs, and optional embeddings.
 
-- donor packs
-- corpus DB builders
-- style radar
-- formatting packs
-- optional embedding index generation
-
-What is gone is the live internal acquisition layer, not the product-facing retrieval substrate.
+What dropped out of the public repo was the private live acquisition layer. The user-facing retrieval substrate is still there.
 
 ## Do I need Grok to use Brotherizer?
 
 No.
 
-The judge lane is optional. Brotherizer can run rewrite generation without xAI.
+You can skip the judge lane entirely. The main rewrite flow still runs without xAI.
 
 ## Do I need embeddings to use Brotherizer?
 
 No.
 
-Embeddings are optional. The main shipped runtime path still works through lexical/database retrieval.
+Embeddings are optional. Lexical/database retrieval still handles the main flow.
 
 ## Why multiple candidates?
 
-Because one-shot rewrites are often "fine" in the most annoying possible way.
+Single rewrites often come back technically fine and forgettable.
 
-Brotherizer prefers to generate options and then decide.
+Brotherizer generates a few, then chooses. That usually gives you a better line than trusting the first pass.
 
 ## Does Brotherizer bypass AI detectors?
 
-That is not the product claim.
+That is not the claim.
 
-Brotherizer exists to make text sound less generic and more human, not to market detector evasion.
+The goal is to make text less canned and more human. No detector promises.
 
 ## Can I contribute a new language?
 
-Yes, please.
+Absolutely.
 
-That is one of the most useful ways to improve Brotherizer.
+It is one of the best ways to improve the product.
 
 Start here:
-
 - [`RESEARCH/CONTRIBUTING.md`](../../RESEARCH/CONTRIBUTING.md)
 - [`RESEARCH/LANGUAGE_COVERAGE.md`](../../RESEARCH/LANGUAGE_COVERAGE.md)
 
 ## Why 5555?
 
-Because the public scripts and docs are standardized around that local port today. You can still override it with `BROTHERIZER_PORT`.
+That is the standard port used by the public scripts and docs.
+
+You can still override it with `BROTHERIZER_PORT`.

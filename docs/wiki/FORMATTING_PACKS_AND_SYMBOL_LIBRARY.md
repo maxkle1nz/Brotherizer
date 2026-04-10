@@ -1,14 +1,10 @@
 # Formatting Packs and Symbol Library
 
-Brotherizer does not only retrieve donor text.
-
-It also retrieves surface behavior.
-
-That is what formatting packs are for.
+Brotherizer goes beyond just pulling donor text. It also picks up surface behavior. That is where formatting packs come in.
 
 ## What they are
 
-Formatting packs are curated bundles that tell Brotherizer what kinds of:
+Formatting packs are curated sets that guide Brotherizer on the right:
 
 - reactions
 - emotive markers
@@ -18,7 +14,7 @@ Formatting packs are curated bundles that tell Brotherizer what kinds of:
 - formatting moves
 - surface-specific rules
 
-belong on a given writing surface.
+for a given writing surface.
 
 The public source of truth lives in:
 
@@ -26,15 +22,15 @@ The public source of truth lives in:
 
 ## How they differ from style radar
 
-These layers are related, but they are not the same thing:
+These are related but distinct:
 
-- **style radar** helps Brotherizer understand the broader signal environment
-- **formatting packs** tell Brotherizer which formatting moves are culturally native on the surface itself
+- **style radar** reads the broader signal environment
+- **formatting packs** specify formatting that's native to the surface
 
-In plain terms:
+Put simply:
 
-- style radar says "what kind of surface energy is this?"
-- formatting packs say "what marks and structures belong here?"
+- style radar asks: what kind of surface energy is this?
+- formatting packs ask: what marks and structures belong here?
 
 ## Runtime role
 
@@ -44,7 +40,7 @@ During payload building, Brotherizer resolves a formatting pack based on:
 - mode profile
 - surface mode
 
-That pack is then injected into the rewrite prompt as part of the conditioning payload.
+That pack is then injected into the rewrite prompt as conditioning.
 
 ## Why this matters
 
@@ -58,7 +54,7 @@ It is also about:
 - whether a caption can carry a reaction marker
 - whether a note should stay restrained
 
-Formatting packs help Brotherizer handle that without falling back to generic emoji sludge or fake internet voice.
+Formatting packs help Brotherizer handle that without defaulting to generic emoji or forced internet voice.
 
 ## Contribution rules
 
@@ -72,6 +68,6 @@ If you want to extend the symbol library:
 
 ## Public guardrail
 
-Brotherizer should feel more human, not more gimmicky.
+Brotherizer should feel more human, not gimmicky.
 
 If a formatting pack makes the output louder but less believable, it is not a good pack.

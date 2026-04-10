@@ -1,14 +1,10 @@
 # Brotherizer Docs
 
-This repo uses an in-repo wiki layout on purpose.
+This repo keeps the docs close to the product on purpose.
 
-Why:
+Git history stays with the docs. Product changes and doc changes get reviewed together. And the public story stays in the repo instead of drifting into a detached wiki.
 
-- Git history stays with the docs
-- product changes and doc changes can be reviewed together
-- the public story stays in the repo instead of drifting into a detached wiki
-
-The `docs/wiki/` folder is also structured to be easy to mirror into a GitHub Wiki later if you want the public docs in both places.
+The `docs/wiki/` folder is ready to mirror into a GitHub Wiki later if you want the public docs in both places.
 
 ## Start here
 
@@ -30,6 +26,8 @@ The `docs/wiki/` folder is also structured to be easy to mirror into a GitHub Wi
 - [FAQ](wiki/FAQ.md)
 
 ## Research and corpus-building
+
+These pages cover the retrieval substrate, local databases, and contributor workflow behind the product surface.
 
 - [`RESEARCH/README.md`](../RESEARCH/README.md)
 - [`RESEARCH/BUILDING_DATABASES.md`](../RESEARCH/BUILDING_DATABASES.md)

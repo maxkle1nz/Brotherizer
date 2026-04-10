@@ -1,6 +1,6 @@
 # Runtime Lifecycle and Recovery
 
-Brotherizer jobs move through a real runtime lifecycle.
+Brotherizer treats rewriting as a real runtime, not just a string-in, string-out helper.
 
 ## States
 
@@ -31,7 +31,7 @@ If the client later chooses a non-winner candidate:
 
 ## Chooseable state
 
-A job is chooseable when it is already terminal and has candidates persisted.
+A job is chooseable once it is terminal and has persisted candidates.
 
 In practice, Brotherizer only allows choosing from:
 
@@ -55,7 +55,7 @@ If runtime execution fails:
 
 ## Restart behavior
 
-On runtime startup, Brotherizer checks for jobs that were in-flight during the last process.
+On runtime startup, Brotherizer looks for jobs that were in-flight when the previous process stopped.
 
 If a job was left in:
 
@@ -68,12 +68,10 @@ the runtime marks it as:
 
 - `failed`
 
-and records a runtime error explaining that the process restarted while the job was in flight.
+and records a runtime error explaining that the process restarted while the job was still running.
 
-That is intentional for v1. It is honest, durable, and easy to reason about.
+That is intentional for v1. It keeps the system honest and easy to reason about.
 
 ## Why this matters
 
-This is one of the subtle product differences in Brotherizer.
-
-It is not just a string-in, string-out helper. It keeps a runtime record of how the decision happened.
+Brotherizer keeps a runtime record of the rewrite decision, so it behaves like a product service instead of a throwaway text transform.

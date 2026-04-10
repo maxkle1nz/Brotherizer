@@ -1,6 +1,6 @@
 # API Reference
 
-Brotherizer is API-first.
+Brotherizer is API-first, but it does not make a thing of it. One runtime. Typed `/v1` endpoints. Legacy wrappers only where compatibility still matters.
 
 ## Canonical endpoints
 
@@ -12,7 +12,9 @@ Brotherizer is API-first.
 - `GET /v1/jobs/:id`
 - `POST /v1/jobs/:id/choose`
 
-Legacy wrappers still exist:
+Build against `/v1/*`.
+
+Legacy wrappers still exist for older callers:
 
 - `GET /health`
 - `GET /modes`
@@ -34,6 +36,8 @@ Override with:
 
 ## `POST /v1/rewrite`
 
+Brotherizer rewrites are job-based: submit text, pick a mode, and get back a durable runtime job with candidates, a winner, and optional judge insight.
+
 Request body:
 
 ```json
@@ -54,9 +58,11 @@ Notes:
 - `surface_mode` is optional
 - `query` is optional
 - `candidate_count` defaults to `3`
-- `use_xai_judge` enables the optional Grok judge lane
+- `use_xai_judge` turns on the optional Grok judge lane
 
 ## `GET /v1/capabilities`
+
+This endpoint is the client-facing feature gate. Treat it as the source of truth for what the runtime can do right now.
 
 Current shipped capability groups:
 
@@ -66,8 +72,8 @@ Current shipped capability groups:
 
 What they mean:
 
-- `providers.generation` describes the fast rewrite lane
-- `providers.judge` describes the optional judge lane
+- `providers.generation` names the fast rewrite lane
+- `providers.judge` names the optional judge lane
 - `limits.max_input_chars` is the practical input ceiling enforced by the runtime
 - `limits.max_candidate_count` is the supported candidate cap
 - `limits.supports_document_rewrite` is currently `false`
@@ -77,7 +83,7 @@ What they mean:
 
 ## `GET /v1/jobs/:id`
 
-Returns the full persisted job shape, including:
+Returns the full persisted job record, including:
 
 - `winner`
 - `chosen`
@@ -90,13 +96,7 @@ Returns the full persisted job shape, including:
 
 ## `GET /`
 
-The root endpoint is a small descriptor surface.
-
-It is useful for:
-
-- quick service discovery
-- local smoke checks
-- simple clients that want to enumerate endpoints without fetching the full docs
+The root endpoint is a small discovery surface. It is handy for smoke checks and for simple clients that want the shape of Brotherizer without reading the full docs first.
 
 Current response shape:
 
@@ -121,7 +121,7 @@ Current response shape:
 
 ## `POST /v1/jobs/:id/choose`
 
-Choose a non-winner candidate later:
+Use this when a client wants to override the runtime-selected winner later:
 
 ```json
 {

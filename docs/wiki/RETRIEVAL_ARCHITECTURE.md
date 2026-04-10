@@ -2,7 +2,7 @@
 
 Brotherizer is not prompt-only.
 
-The rewrite engine is fed by a retrieval stack with three main layers:
+The rewrite engine runs on a three-layer retrieval stack:
 
 1. donor snippets
 2. style radar signals
@@ -10,18 +10,15 @@ The rewrite engine is fed by a retrieval stack with three main layers:
 
 ## Donor retrieval
 
-Brotherizer can pull donor material from:
+Brotherizer can pull donor material from local donor-pack files or the corpus database.
 
-- local donor-pack files
-- the corpus database
+The default runtime path is lexical and database retrieval, not mandatory semantic embeddings.
 
-The default runtime path is lexical/database retrieval, not mandatory semantic embeddings.
-
-That is important because it means the product still works even if you have not built the local embedding index.
+That matters because the product still works even if you have not built a local embedding index.
 
 ## Semantic retrieval
 
-Semantic retrieval exists as an optional local lane:
+Semantic retrieval exists as an optional local lane.
 
 - build embeddings locally
 - query semantically when you want that extra retrieval behavior
@@ -30,9 +27,9 @@ Useful, but not required.
 
 ## Style radar
 
-Style radar is the curated signal layer that helps the runtime understand surface behavior.
+Style radar is the curated signal layer that helps the runtime read surface behavior.
 
-It does not replace donor snippets. It complements them.
+It does not replace donor snippets. It sits alongside them.
 
 ## Formatting packs
 
@@ -46,12 +43,12 @@ Formatting packs help Brotherizer decide:
 
 At a high level:
 
-- mode config chooses the retrieval frame
-- donor retrieval supplies actual style texture
-- style radar supplies contextual signal
+- mode config picks the retrieval frame
+- donor retrieval brings in the actual style texture
+- style radar adds contextual signal
 - formatting packs refine surface-native behavior
 
-That payload then feeds generation and reranking.
+That combined payload then feeds generation and reranking.
 
 ## Public takeaway
 

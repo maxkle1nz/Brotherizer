@@ -1,10 +1,10 @@
 # Safety and Sanitization
 
-Brotherizer's public research surface has to stay useful **and** safe.
+Brotherizer's public research surface stays useful **and** safe.
 
 ## Sanitization rules
 
-Before a pack is committed:
+Before committing a pack:
 
 - remove `@handles`
 - remove names where they identify the author
@@ -13,7 +13,7 @@ Before a pack is committed:
 - remove source references
 - remove identity-bearing metadata
 
-The repo already includes a sanitization helper:
+The repo includes a sanitization helper:
 
 - [`scripts/sanitize_donor_packs.py`](../scripts/sanitize_donor_packs.py)
 
@@ -33,12 +33,12 @@ Use:
 
 ## Copyright and provenance
 
-Brotherizer is interested in reusable voice signals, not in shipping personal archives.
+Brotherizer focuses on reusable voice signals, not personal archives.
 
 Contributors should avoid packing identifiable personal material or proprietary source dumps into public packs.
 
 ## Public-repo rule
 
-If a contribution makes the repo harder to trust, it is not a good contribution.
+If a contribution makes the repo harder to trust, it is not a good one.
 
 Clean data wins.

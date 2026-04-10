@@ -2,9 +2,9 @@
 
 Style radar is Brotherizer's curated signal layer.
 
-It is not a magic black box and it is not a giant external intelligence system.
+It is not a magic black box. Not a giant external intelligence system.
 
-It is a small, explicit store of style signals that helps the runtime decide what kinds of formatting, texture, and internet-native moves are appropriate.
+It is a small, explicit store of style signals. It helps the runtime decide on formatting, texture, and internet-native moves.
 
 ## What it does
 
@@ -24,12 +24,12 @@ The public seed source lives in:
 
 ## Runtime role
 
-During payload building, Brotherizer can query style radar signals based on:
+During payload building, Brotherizer queries style radar signals based on:
 
 - language
 - intended bucket
 
-Those signals then inform rewrite conditioning alongside:
+Those signals inform rewrite conditioning alongside:
 
 - donor snippets
 - mode profile
@@ -44,4 +44,4 @@ Style radar is not:
 - a hidden social graph
 - a trained classifier with opaque provenance
 
-It is curated signal scaffolding. Useful, but intentionally bounded.
+It is curated signal scaffolding: useful, but intentionally bounded.

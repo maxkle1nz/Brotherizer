@@ -4,14 +4,14 @@ Brotherizer lives in a crowded neighborhood, but its lane is still distinct.
 
 ## Adjacent categories
 
-The nearest public categories are:
+Its nearest public categories are:
 
 - brand-voice rewriting platforms
 - consumer paraphrasers / humanizers
 - prompt and LLM middleware
 - writing assistants
 
-Named neighbors include products like Jasper, Writer, Grammarly, Wordtune, QuillBot, PromptLayer, and LangSmith.
+Named neighbors include Jasper, Writer, Grammarly, Wordtune, QuillBot, PromptLayer, and LangSmith.
 
 ## Where Brotherizer is different
 
@@ -23,18 +23,18 @@ Its sharpest public position is:
 
 That means:
 
-- it does not rely on prompt adjectives alone
-- it does not stop at a single candidate
-- it does not frame itself as detector-bypass theater
+- it retrieves style texture instead of guessing from prompt adjectives
+- it rewrites for mode and surface, not just for generic tone
+- it reranks multiple candidates before the client sees the winner
 - it gives agents and products a better final-output layer
 
 ## What we should claim publicly
 
 Safe and strong claims:
 
-- Brotherizer retrieves style texture instead of guessing blindly
+- Brotherizer retrieves style texture instead of guessing from prompt adjectives
 - Brotherizer rewrites for mode and surface
-- Brotherizer reranks multiple candidates instead of trusting first-pass output
+- Brotherizer reranks multiple candidates before the client picks a winner
 - Brotherizer can split fast generation from reasoning-heavy judgment
 - Brotherizer is designed to grow through multilingual donor packs
 
@@ -51,7 +51,7 @@ That kind of copy burns trust fast.
 
 ## The category line
 
-The cleanest way to describe Brotherizer is:
+The cleanest public description is:
 
 **an API-first style-retrieval, rewrite, and reranking runtime for LLM output.**
 

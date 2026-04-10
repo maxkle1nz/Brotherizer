@@ -1,6 +1,6 @@
 # Model Routing and Providers
 
-Brotherizer ships with a provider split, not a provider blur.
+Brotherizer keeps its provider split visible. Fast rewrite, optional judgment, and local embeddings each get their own lane.
 
 ## Current lanes
 
@@ -73,4 +73,4 @@ We do not say:
 - "Perplexity is weaker"
 - "Brotherizer is provider-agnostic magic"
 
-The repo is wired around real current lanes, and the docs should say exactly that.
+The repo is wired around real lanes, and the docs should say exactly that.

@@ -1,12 +1,12 @@
 # Building Databases
 
-Brotherizer's public research stack is local-first.
+Brotherizer's public research stack is local-first. That keeps the build path straightforward and under your control.
 
 ## Corpus DB
 
-The corpus DB is the main donor store.
+This is the main donor store. It holds the core text Brotherizer retrieves from.
 
-Build it:
+Build it like this:
 
 ```bash
 python3 storage/build_corpus_db.py \
@@ -14,11 +14,11 @@ python3 storage/build_corpus_db.py \
   --db data/corpus/brotherizer.db
 ```
 
-This ingests donor rows into SQLite, including the text, voice bucket, topic tags, and scoring fields Brotherizer uses for retrieval.
+It pulls donor rows into SQLite, along with the voice buckets, topic tags, and scoring fields that retrieval relies on.
 
-## Style radar DB
+## Style Radar DB
 
-The style radar DB is a curated signal store, not a giant learned model.
+This is a curated signal store. Not a giant trained model, just the focused signals Brotherizer actually uses.
 
 Build it:
 
@@ -28,9 +28,9 @@ python3 storage/build_style_radar_db.py \
   --db data/corpus/style_radar.db
 ```
 
-## Optional embedding index
+## Optional Embedding Index
 
-Semantic retrieval is optional.
+Use this if you want semantic retrieval.
 
 Build it:
 
@@ -44,14 +44,14 @@ Requirements:
 - Ollama running locally
 - a compatible embedding model, default `nomic-embed-text`
 
-## Suggested local workflow
+## Suggested Local Workflow
 
 1. add or update a donor pack
 2. rebuild the corpus DB
-3. rebuild style radar if signal definitions changed
-4. optionally rebuild embeddings
+3. rebuild style radar if the signal definitions changed
+4. rebuild embeddings if you are using the semantic lane
 5. test a few rewrites before opening a PR
 
-## Important note
+## Important Note
 
-Embeddings are a useful research and retrieval option, but they are **not** required for the default runtime path in this repo.
+Embeddings help with research retrieval, but they are **not** required for the default runtime in this repo.

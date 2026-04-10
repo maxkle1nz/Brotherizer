@@ -1,8 +1,8 @@
 # Start Here
 
-Brotherizer is the rewrite engine you call when LLM text is technically fine and emotionally flat.
+Brotherizer gives LLM text a pulse when the model gets the facts right and the feeling wrong.
 
-It retrieves donor texture, rewrites for the right mode and surface, reranks multiple candidates, and lets the client keep the winner or choose another option.
+It pulls donor texture, rewrites for the right mode and surface, reranks multiple candidates, and lets the client keep the winner or choose another option.
 
 That is the whole product thesis:
 
@@ -13,7 +13,7 @@ That is the whole product thesis:
 
 ## Who it is for
 
-Brotherizer is for:
+Brotherizer is for teams that already generate text and want the last pass to sound human:
 
 - agent builders
 - CLI / API product teams
@@ -29,11 +29,11 @@ Brotherizer is not:
 - a detector-evasion tool
 - a vibe-only prompt wrapper
 
-It is a narrow runtime with good taste.
+It is a narrow runtime with good taste, not a general writing app.
 
 ## The short version
 
-If the model keeps saying the right thing the wrong way, Brotherizer is what you call next.
+If the model says the right thing in the wrong voice, Brotherizer is what you call next.
 
 ## Read next
 

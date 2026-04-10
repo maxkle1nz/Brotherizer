@@ -1,25 +1,25 @@
-# RESEARCH
+# Research
 
-This folder documents the public research substrate behind Brotherizer.
+This folder lays out the public research side of Brotherizer.
 
-That means:
+That covers:
 
 - how donor packs work
-- how local databases are built
-- how style radar fits in
-- how to contribute new languages safely
+- building local databases
+- where style radar comes in
+- contributing new languages safely
 
-It does **not** try to publish private collection pipelines, secret-bearing integrations, or internal-only rationale.
+It stays clear of private pipelines, secret-bearing integrations, and internal-only reasoning.
 
-## What still exists publicly
+## What we ship publicly
 
-Brotherizer still ships:
+Brotherizer includes:
 
-- donor packs under [`data/donor_packs/`](../data/donor_packs/)
+- donor packs in `data/donor_packs/`
 - corpus DB builders
 - style radar DB builders
-- optional local embedding index generation
-- retrieval selectors and rewrite payload builders
+- optional local embedding indexes
+- retrieval selectors and rewrite builders
 
 ## Read next
 

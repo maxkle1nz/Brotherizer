@@ -1,6 +1,6 @@
 # Donor Packs
 
-Donor packs are the raw style memory behind Brotherizer.
+Donor packs are the raw style memory that powers Brotherizer.
 
 They are deliberately simple:
 
@@ -9,10 +9,9 @@ They are deliberately simple:
 - identity-safe
 - easy to review
 
-## What a donor row contains
+## What's in a donor row
 
-Current public donor rows typically include:
-
+Public donor rows usually include:
 - `platform`
 - `source_kind`
 - `content_role`
@@ -24,28 +23,26 @@ Current public donor rows typically include:
 - `donor_score`
 - `source_quality_score`
 
-See [`pack-schema.example.ndjson`](pack-schema.example.ndjson) for a minimal public-safe example.
+Check [`pack-schema.example.ndjson`](pack-schema.example.ndjson) for a clean example.
 
-## What a donor row should not contain
+## What to leave out
 
 Do not include:
-
 - `@handles`
 - names
 - emails
 - signatures
 - source URLs
 - source refs
-- metadata that can identify the author
+- any metadata that IDs the author
 
-Brotherizer wants the writing behavior, not the author trail.
+Brotherizer wants the writing behavior, not the trail back to who wrote it.
 
 ## Voice buckets
 
-`voice_bucket` is how Brotherizer routes text families during retrieval.
+`voice_bucket` routes text families for retrieval.
 
-Examples in the repo include:
-
+Examples in the repo:
 - `reply_bodies`
 - `casual_us_human`
 - `british_banter`
@@ -54,24 +51,23 @@ Examples in the repo include:
 - `ptbr_reflective`
 - `ptbr_professional_human`
 
-## Good donor-pack habits
+## Habits for good packs
 
-- keep one language per pack
-- keep the pack text-only
-- keep tone internally coherent
-- use topic tags to help retrieval, not to narrate source identity
-- prefer compact, high-signal rows over bloated dumps
+- one language per pack
+- text-only rows
+- tone that stays coherent inside the pack
+- topic tags for retrieval, not for identifying sources
+- compact, high-signal rows over bloated dumps
 
-## What makes a pack useful
+## What makes packs useful
 
-Good packs do not just contain "nice writing."
+Not just "nice writing."
 
-They contain:
-
+They need:
 - repeatable rhythm
 - clear tone pressure
-- useful compression habits
+- useful compression
 - human asymmetry
-- surface-native punctuation and pacing
+- punctuation and pacing that feels surface-native
 
 That is the good stuff.

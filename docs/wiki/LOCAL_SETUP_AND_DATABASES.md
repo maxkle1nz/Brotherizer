@@ -1,6 +1,6 @@
 # Local Setup and Databases
 
-Brotherizer has three local data layers worth knowing about:
+Brotherizer uses three local data stores worth setting up:
 
 1. **corpus DB**
 2. **style radar DB**
@@ -8,9 +8,9 @@ Brotherizer has three local data layers worth knowing about:
 
 ## 1. Corpus DB
 
-The corpus DB stores donor snippets and the retrieval surfaces around them.
+This is the main donor store. It holds the text Brotherizer retrieves from, along with the fields that make retrieval useful.
 
-Build it like this:
+Run:
 
 ```bash
 python3 storage/build_corpus_db.py \
@@ -18,13 +18,9 @@ python3 storage/build_corpus_db.py \
   --db data/corpus/brotherizer.db
 ```
 
-This is the main retrieval substrate.
-
 ## 2. Style radar DB
 
-The style radar DB stores curated signal seeds used to influence surface-aware behavior.
-
-Build it like this:
+This holds the curated signal layer that shapes surface-aware behavior.
 
 ```bash
 python3 storage/build_style_radar_db.py \
@@ -34,26 +30,24 @@ python3 storage/build_style_radar_db.py \
 
 ## 3. Optional embedding index
 
-If you want semantic retrieval on top of the donor corpus, build embeddings locally:
+Use this if you want semantic retrieval on top of the donor corpus:
 
 ```bash
 python3 storage/build_embedding_index.py \
   --db data/corpus/brotherizer.db
 ```
 
-This uses Ollama by default.
+This step depends on Ollama. If Ollama is not running, the optional semantic lane fails, but the core runtime still works.
 
-If Ollama is not running, this step will fail. That does **not** mean Brotherizer is broken. It just means the optional semantic lane is unavailable.
+## Suggested order
 
-## Recommended setup order
+1. corpus DB
+2. style radar DB
+3. embeddings (optional)
+4. rewrite tests
+5. API launch
 
-1. build corpus DB
-2. build style radar DB
-3. optionally build embeddings
-4. run rewrite tests
-5. start the API
-
-## Where to go next
+## Next steps
 
 - [API Reference](API_REFERENCE.md)
 - [`RESEARCH/BUILDING_DATABASES.md`](../../RESEARCH/BUILDING_DATABASES.md)
