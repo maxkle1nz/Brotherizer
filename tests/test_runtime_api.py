@@ -47,24 +47,6 @@ class RuntimeApiTests(unittest.TestCase):
         self.assertIn("limits", payload)
         self.assertIn("features", payload)
 
-    def test_demo_route(self) -> None:
-        with urllib.request.urlopen(f"{self.base}/demo") as resp:
-            body = resp.read().decode("utf-8")
-            self.assertEqual(resp.status, 200)
-            self.assertIn("text/html", resp.headers.get("Content-Type", ""))
-            self.assertIn("Brotherizer Demo", body)
-
-    def test_demo_alias_route(self) -> None:
-        with urllib.request.urlopen(f"{self.base}/demo/") as resp:
-            body = resp.read().decode("utf-8")
-            self.assertEqual(resp.status, 200)
-            self.assertIn("Brotherizer Demo", body)
-
-    def test_root_advertises_demo(self) -> None:
-        status, payload = fetch_json(f"{self.base}/")
-        self.assertEqual(status, 200)
-        self.assertIn("/demo", payload["endpoints"])
-
     @patch("api.brotherizer_api.submit_rewrite")
     def test_v1_rewrite_error_envelope(self, mocked_submit) -> None:
         mocked_submit.side_effect = RuntimeApiError(

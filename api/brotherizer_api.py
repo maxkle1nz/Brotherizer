@@ -30,16 +30,11 @@ from runtime.service import (  # noqa: E402
 from runtime.paths import resource_path, writable_path  # noqa: E402
 V1_JOB_PATH_RE = re.compile(r"^/v1/jobs/([^/]+)$")
 V1_CHOOSE_PATH_RE = re.compile(r"^/v1/jobs/([^/]+)/choose$")
-DEMO_PATHS = {"/demo", "/demo/"}
 
 
 def json_response(status: int, payload: dict) -> tuple[bytes, str]:
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
     return body, "application/json; charset=utf-8"
-
-
-def html_response(path: Path) -> tuple[bytes, str]:
-    return path.read_bytes(), "text/html; charset=utf-8"
 
 
 def legacy_rewrite_payload(job_result: dict) -> dict:
@@ -83,30 +78,25 @@ class BrotherizerHandler(BaseHTTPRequestHandler):
         raw = self.rfile.read(length)
         return json.loads(raw.decode("utf-8"))
 
-    def _send(self, status: int, body: bytes, content_type: str, *, head_only: bool = False) -> None:
+    def _send(self, status: int, body: bytes, content_type: str) -> None:
         self.send_response(status)
         self.send_header("Content-Type", content_type)
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
-        if not head_only:
-            self.wfile.write(body)
+        self.wfile.write(body)
 
-    def _json(self, status: int, payload: dict, *, head_only: bool = False) -> None:
+    def _json(self, status: int, payload: dict) -> None:
         body, content_type = json_response(status, payload)
-        self._send(status, body, content_type, head_only=head_only)
+        self._send(status, body, content_type)
 
-    def _html(self, status: int, path: Path, *, head_only: bool = False) -> None:
-        body, content_type = html_response(path)
-        self._send(status, body, content_type, head_only=head_only)
+    def _runtime_error(self, exc: RuntimeApiError) -> None:
+        self._json(exc.status, exc.to_payload())
 
-    def _runtime_error(self, exc: RuntimeApiError, *, head_only: bool = False) -> None:
-        self._json(exc.status, exc.to_payload(), head_only=head_only)
-
-    def _handle_get(self, *, head_only: bool = False) -> None:
+    def do_GET(self) -> None:  # noqa: N802
         path = urlparse(self.path).path
 
         if path == "/health":
-            self._json(HTTPStatus.OK, {"ok": True, "service": "brotherizer", "version": "1.0.0"}, head_only=head_only)
+            self._json(HTTPStatus.OK, {"ok": True, "service": "brotherizer", "version": "1.0.0"})
             return
         if path == "/v1/health":
             self._json(
@@ -117,27 +107,23 @@ class BrotherizerHandler(BaseHTTPRequestHandler):
                     "runtime": "brotherizer-runtime",
                     "time": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
                 },
-                head_only=head_only,
             )
             return
         if path == "/modes":
-            self._json(HTTPStatus.OK, json.loads(resource_path("configs", "brotherizer_modes.json").read_text()), head_only=head_only)
+            self._json(HTTPStatus.OK, json.loads(resource_path("configs", "brotherizer_modes.json").read_text()))
             return
         if path == "/v1/modes":
-            self._json(HTTPStatus.OK, modes_payload(), head_only=head_only)
+            self._json(HTTPStatus.OK, modes_payload())
             return
         if path == "/v1/capabilities":
-            self._json(HTTPStatus.OK, capabilities_payload(), head_only=head_only)
-            return
-        if path in DEMO_PATHS:
-            self._html(HTTPStatus.OK, resource_path("demo", "index.html"), head_only=head_only)
+            self._json(HTTPStatus.OK, capabilities_payload())
             return
         job_match = V1_JOB_PATH_RE.match(path)
         if job_match:
             try:
-                self._json(HTTPStatus.OK, get_job_response(job_match.group(1)), head_only=head_only)
+                self._json(HTTPStatus.OK, get_job_response(job_match.group(1)))
             except RuntimeApiError as exc:
-                self._runtime_error(exc, head_only=head_only)
+                self._runtime_error(exc)
             return
         if path == "/":
             self._json(
@@ -153,22 +139,14 @@ class BrotherizerHandler(BaseHTTPRequestHandler):
                         "/v1/rewrite",
                         "/v1/jobs/:id",
                         "/v1/jobs/:id/choose",
-                        "/demo",
                         "/health",
                         "/modes",
                         "/rewrite",
                     ],
                 },
-                head_only=head_only,
             )
             return
-        self._json(HTTPStatus.NOT_FOUND, {"ok": False, "error": "not_found"}, head_only=head_only)
-
-    def do_GET(self) -> None:  # noqa: N802
-        self._handle_get(head_only=False)
-
-    def do_HEAD(self) -> None:  # noqa: N802
-        self._handle_get(head_only=True)
+        self._json(HTTPStatus.NOT_FOUND, {"ok": False, "error": "not_found"})
 
     def do_POST(self) -> None:  # noqa: N802
         path = urlparse(self.path).path

@@ -11,7 +11,6 @@ Brotherizer is API-first, but it does not make a thing of it. One runtime. Typed
 - `POST /v1/rewrite`
 - `GET /v1/jobs/:id`
 - `POST /v1/jobs/:id/choose`
-- `GET /demo`
 
 Build against `/v1/*`.
 
@@ -22,23 +21,6 @@ Legacy wrappers still exist for older callers:
 - `POST /rewrite`
 
 Compatibility details live in [Legacy Wrappers and Compatibility](LEGACY_WRAPPERS_AND_COMPATIBILITY.md).
-
-## `GET /demo`
-
-Brotherizer ships a public-facing interactive demo route.
-
-`/demo` is a packaged static experience served by the same runtime. It is meant to show:
-
-- plain model output vs Brotherized output
-- multiple style examples
-- a slider-driven transformation demo
-- an optional live playground that calls `/v1/rewrite`
-
-The page is useful for:
-
-- first-time product evaluation
-- quick stakeholder demos
-- showing the value of mode and surface routing without reading the whole handbook
 
 ## Default host and port
 
@@ -130,7 +112,6 @@ Current response shape:
     "/v1/rewrite",
     "/v1/jobs/:id",
     "/v1/jobs/:id/choose",
-    "/demo",
     "/health",
     "/modes",
     "/rewrite"

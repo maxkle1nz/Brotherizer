@@ -1,1 +1,0 @@
-"""Packaged Brotherizer demo assets."""
