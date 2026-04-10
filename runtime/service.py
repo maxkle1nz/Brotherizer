@@ -191,22 +191,20 @@ def normalize_rewrite_request(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _legacy_api_run(
+def _run_generation(
     *,
     source_text: str,
     mode: str,
     query: str,
     surface_mode: str,
     candidate_count: int,
-    use_xai_judge: bool,
-) -> tuple[dict[str, Any], list[dict[str, Any]], dict[str, float]]:
+) -> dict[str, Any]:
     env = dict(os.environ)
     if not env.get("PERPLEXITY_API_KEY", "").strip():
         raise RuntimeApiError("MISSING_PERPLEXITY_KEY", "Missing PERPLEXITY_API_KEY.", phase="generating", status=500)
 
     with make_tempdir() as tmpdir:
         rewrite_path = Path(tmpdir) / "rewrite.json"
-        reranked_path = Path(tmpdir) / "reranked.json"
 
         import subprocess
 
@@ -229,25 +227,7 @@ def _legacy_api_run(
             str(rewrite_path),
         ]
         subprocess.run(executor_cmd, check=True, capture_output=True, text=True, env=env)
-        generated = json.loads(rewrite_path.read_text())
-
-        scored = heuristic_rerank(generated)
-        xai_scores: dict[str, float] = {}
-        if use_xai_judge and judge_enabled():
-            xai_scores = run_xai_judge_scores(
-                source_text=generated.get("source_text", source_text),
-                preferred_bucket=generated.get("preferred_bucket", ""),
-                donor_snippets=generated.get("donor_snippets", []),
-                candidates=generated.get("candidates", []),
-                xai_model=active_judge_model(),
-            )
-            scored = merge_xai_scores(scored, xai_scores)
-
-        result = dict(generated)
-        result["candidates"] = scored
-        result["winner"] = scored[0] if scored else None
-        reranked_path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
-        return generated, scored, xai_scores
+        return json.loads(rewrite_path.read_text())
 
 
 def _candidate_record(job_id: str, idx: int, item: dict[str, Any], generated: dict[str, Any]) -> dict[str, Any]:
@@ -417,21 +397,27 @@ def submit_rewrite(payload: dict[str, Any], *, idempotency_key: str | None = Non
 
     try:
         update_job_state(conn, job_id=job_id, status="generating", updated_at=now_iso())
-        generated, scored, xai_scores = _legacy_api_run(
+        generated = _run_generation(
             source_text=normalized["text"],
             mode=normalized["mode"],
             query=normalized["query"],
             surface_mode=normalized["surface_mode"],
             candidate_count=normalized["candidate_count"],
-            use_xai_judge=normalized["use_xai_judge"] and judge_enabled(),
         )
 
-        # We treat reranking and judging as explicit Runtime phases even though generation remains synchronous.
-        final_status = "completed"
+        update_job_state(conn, job_id=job_id, status="reranking", updated_at=now_iso())
+        scored = heuristic_rerank(generated)
+        xai_scores: dict[str, float] = {}
         if normalized["use_xai_judge"] and judge_enabled():
             update_job_state(conn, job_id=job_id, status="judging", updated_at=now_iso())
-        else:
-            update_job_state(conn, job_id=job_id, status="reranking", updated_at=now_iso())
+            xai_scores = run_xai_judge_scores(
+                source_text=generated.get("source_text", normalized["text"]),
+                preferred_bucket=generated.get("preferred_bucket", ""),
+                donor_snippets=generated.get("donor_snippets", []),
+                candidates=generated.get("candidates", []),
+                xai_model=active_judge_model(),
+            )
+            scored = merge_xai_scores(scored, xai_scores)
 
         records = [_candidate_record(job_id, idx, item, generated) for idx, item in enumerate(scored)]
         replace_candidates(conn, job_id=job_id, candidates=records)
@@ -440,7 +426,7 @@ def submit_rewrite(payload: dict[str, Any], *, idempotency_key: str | None = Non
         update_job_state(
             conn,
             job_id=job_id,
-            status=final_status,
+            status="completed",
             updated_at=now_iso(),
             completed_at=now_iso(),
             winner_candidate_id=winner_candidate_id,
