@@ -13,10 +13,10 @@ No detector theater. No fake warmth. No polished-for-no-reason copy.
 Just text that sounds awake instead of overmanaged.
 
 <p align="center">
-  <img src="assets/readme/brotherizer-mascot.png" alt="Brotherizer mascot" width="460" />
+  <img src="assets/readme/brotherizer-human-machine.png" alt="Brotherizer human and machine vibe" width="560" />
 </p>
 
-<p align="center"><em>Clean machine. Human output. Builder energy.</em></p>
+<p align="center"><em>The point is not to remove the human. It is to give them a better machine.</em></p>
 
 ## What Brotherizer is
 
@@ -384,10 +384,10 @@ Research and corpus-building docs:
 ## Contributing
 
 <p align="center">
-  <img src="assets/readme/brotherizer-human-machine.png" alt="Brotherizer human and machine vibe" width="560" />
+  <img src="assets/readme/brotherizer-mascot.png" alt="Brotherizer mascot" width="460" />
 </p>
 
-<p align="center"><em>The point is not to remove the human. It is to give them a better machine.</em></p>
+<p align="center"><em>Clean machine. Human output. Builder energy.</em></p>
 
 Brotherizer only gets as good as the voice library.
 
