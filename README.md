@@ -100,6 +100,18 @@ Current defaults in the repo:
 
 You can still point the judge lane at earlier Grok reasoning variants by setting `BROTHERIZER_XAI_MODEL`. The public docs explain the split in more detail in [`docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md`](docs/wiki/MODEL_ROUTING_AND_PROVIDERS.md).
 
+## Codex-native runtime
+
+Brotherizer also ships with a Codex skill for running the same voice pipeline inside Codex without using Perplexity as the generation lane:
+
+- skill path: [`skills/brotherizer-codex-runtime`](skills/brotherizer-codex-runtime)
+- generation: Codex
+- context: Brotherizer modes, donor packs, style directives, and surfaces
+- selection: local Brotherizer heuristic reranker
+- required API keys: none for the Codex-native generation path
+
+This is the clean path when you want Codex to "pass Brotherizer" over text while still using Brotherizer's local taste machinery.
+
 ## Research, public and on purpose
 
 Brotherizer ships with a public research substrate. It is the part contributors can inspect, rebuild, and extend:

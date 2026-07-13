@@ -44,8 +44,8 @@ jobs:
 
       - name: Compile
         run: |
-          python -m py_compile api/brotherizer_api.py brotherize.py runtime/service.py storage/runtime_db.py tests/test_runtime_service.py tests/test_runtime_api.py
+          python -m py_compile api/brotherizer_api.py brotherize.py runtime/service.py storage/runtime_db.py skills/brotherizer-codex-runtime/scripts/brotherizer_codex.py tests/test_runtime_service.py tests/test_runtime_api.py tests/test_brotherizer_codex_skill.py
 
       - name: Tests
         run: |
-          python -m unittest tests/test_runtime_service.py tests/test_runtime_api.py
+          python -m unittest tests/test_runtime_service.py tests/test_runtime_api.py tests/test_brotherizer_codex_skill.py
