@@ -24,7 +24,6 @@ It is deliberately narrow: not a chat model, not a prompt suite, not detector ev
 ## Known Problems
 
 - `pip install -e .` fails at build-dependency resolution — root cause is MACHINE-level TLS: the system trust evaluator rejects pypi.org/Fastly and GitHub Actions log certs as "not standards compliant" (seen twice on 2026-07-13; suspect a local TLS-intercepting proxy — investigate outside this repo). `--no-build-isolation` also fails (venv has no setuptools). NOT blocking: console scripts survive from an April editable install and everything runs from source.
-- HTTP `/rewrite` generation lane requires `PERPLEXITY_API_KEY` (see above — key still trapped in the other account). The Codex-native lane covers rewrite work without it.
 - `scripts/start_brotherizer_api.sh` invokes bare `python3` — on this machine that's 3.14 (system). Start it with the venv first on PATH: `PATH="$PWD/.venv/bin:$PATH" scripts/start_brotherizer_api.sh`.
 - The old install at `/Users/cosmophonix/Brotherizer` is now redundant (data recovered) but was NOT deleted — owner's call.
 
@@ -56,7 +55,7 @@ Codex-native lane (no keys):
 
 ## Next Steps (owner to prioritize)
 
-1. Free the Perplexity key from the old account (or decide the Codex-native lane is the only generation path and say so in the README).
-2. Fix the editable install (build-deps pin) so console scripts work.
+1. Add a test that exercises the DB-backed rewrite path end-to-end (both April bugs would have been caught by one).
+2. Fix the editable install (blocked on the machine-level TLS problem, not the repo).
 3. Decide the fate of `/Users/cosmophonix/Brotherizer` (delete after confirming nothing else is unique there).
 4. Dogfood candidate: run the GitRooms Show HN draft through Brotherizer's en_professional_human_mode as a real job — the two projects share a soul.
