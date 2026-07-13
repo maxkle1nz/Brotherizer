@@ -1,0 +1,4 @@
+interface:
+  display_name: "Brotherizer Codex Runtime"
+  short_description: "Run Brotherizer with Codex as the generator"
+  default_prompt: "Use $brotherizer-codex-runtime to rewrite this text with Brotherizer using Codex as the generation lane."
