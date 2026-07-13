@@ -12,8 +12,12 @@ ENV_FILE="${BROTHERIZER_ENV_FILE:-$ROOT_DIR/.runtime/brotherizer.env}"
 mkdir -p "$(dirname "$PID_FILE")"
 
 if [ -f "$ENV_FILE" ]; then
+  # Auto-export everything the env file defines: without this, KEY=value lines
+  # (the .env.example format) stay shell-local and never reach the API process.
+  set -a
   # shellcheck disable=SC1090
   . "$ENV_FILE"
+  set +a
 fi
 
 if curl -fsS "$HEALTH_URL" >/dev/null 2>&1; then

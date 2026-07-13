@@ -258,7 +258,10 @@ def build_payload(source_text: str, query: str, rows: list[dict], preferred_buck
 
 
 def select_db_rows(conn, query: str, preferred_bucket: str, fallback_bucket: str, top_k: int):
-    from corpus_db import query_rows  # type: ignore
+    try:
+        from storage.corpus_db import query_rows  # type: ignore
+    except ImportError:  # pragma: no cover - script-mode fallback
+        from corpus_db import query_rows  # type: ignore
 
     preferred_buckets = [item.strip() for item in preferred_bucket.split(",") if item.strip()]
     if not preferred_buckets:
