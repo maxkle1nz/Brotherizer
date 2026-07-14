@@ -59,3 +59,4 @@ Codex-native lane (no keys):
 2. Fix the editable install (blocked on the machine-level TLS problem, not the repo).
 3. Decide the fate of `/Users/cosmophonix/Brotherizer` (delete after confirming nothing else is unique there).
 4. Dogfood candidate: run the GitRooms Show HN draft through Brotherizer's en_professional_human_mode as a real job — the two projects share a soul.
+5. **Owner-voice donor pack (`kle1nz_voice`), field-proven gap 2026-07-13:** reranking real owner-voice candidates (ellipsis pauses, trailing "....", relaxed caps, no em-dashes) scored NEGATIVE (-5.2 to -2.4) while generic-polished text scored +8.9 — the taste machinery penalizes the owner's actual signature. Until a personal donor pack exists, owner-voice work uses Brotherizer as JUDGE only (Codex-native rerank), never as generator.
