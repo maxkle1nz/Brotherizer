@@ -1,7 +1,7 @@
 # Brotherizer PATHOS
 
 Last updated: 2026-07-13 (evening — HTTP lane proven)
-Scope: local continuity artifact for `/Users/kle1nz/Documents/Brotherizer`. Internal handoff — not public copy, no secrets.
+Scope: local continuity artifact for `~/Documents/Brotherizer`. Internal handoff — not public copy, no secrets.
 
 ## North Star
 
@@ -25,7 +25,7 @@ It is deliberately narrow: not a chat model, not a prompt suite, not detector ev
 
 - [RESOLVED 2026-07-19] The `pip install -e .` TLS failure was TRANSIENT (bad cert/chain on a CDN edge during rotation, most likely) — it stopped reproducing across curl/Python/Go with no local change (no proxy, legit issuers, clock fine), the editable install now succeeds and `storage.*` package imports resolve. Lesson kept: a one-off TLS error is not a diagnosis; reproduce across tools before declaring infrastructure broken.
 - `scripts/start_brotherizer_api.sh` invokes bare `python3` — on this machine that's 3.14 (system). Start it with the venv first on PATH: `PATH="$PWD/.venv/bin:$PATH" scripts/start_brotherizer_api.sh`.
-- The old install at `/Users/cosmophonix/Brotherizer` is now redundant (data recovered) but was NOT deleted — owner's call.
+- The old install at `~/Brotherizer` is now redundant (data recovered) but was NOT deleted — owner's call.
 
 ## How To Run (proven commands)
 
@@ -56,6 +56,6 @@ Codex-native lane (no keys):
 ## Next Steps (owner to prioritize)
 
 1. Add a test that exercises the DB-backed rewrite path end-to-end (both April bugs would have been caught by one).
-3. Decide the fate of `/Users/cosmophonix/Brotherizer` (delete after confirming nothing else is unique there).
-4. Dogfood candidate: run the GitRooms Show HN draft through Brotherizer's en_professional_human_mode as a real job — the two projects share a soul.
+3. Decide the fate of `~/Brotherizer` (delete after confirming nothing else is unique there).
+4. Dogfood candidate: run a Show HN draft through Brotherizer's en_professional_human_mode as a real job.
 5. **Owner-voice donor pack (`kle1nz_voice`), field-proven gap 2026-07-13:** reranking real owner-voice candidates (ellipsis pauses, trailing "....", relaxed caps, no em-dashes) scored NEGATIVE (-5.2 to -2.4) while generic-polished text scored +8.9 — the taste machinery penalizes the owner's actual signature. Until a personal donor pack exists, owner-voice work uses Brotherizer as JUDGE only (Codex-native rerank), never as generator.
